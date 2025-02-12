@@ -3,6 +3,10 @@
 import { useLanguage } from '@/contexts/languageContext';
 import { useTheme } from "@/contexts/themeContext";
 import { useState } from 'react';
+import TodayButton from "@/components/buttons/calendar/TodayButton";
+import SelectedDay from '@/components/subcomponents/calendar/SelectedDay'; 
+import MonthNavToggle from '@/components/buttons/calendar/MonthNavToggle';  
+import CalendarGrid from '@/components/subcomponents/calendar/CalendarGrid';  
 
 const Calendar: React.FC = () => {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
@@ -68,74 +72,33 @@ const Calendar: React.FC = () => {
 
   const calendar = generateCalendar();
 
-  const getSelectedDate = () => {
-    if (!selectedDay) return null;
-    const selectedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), selectedDay);
-    const options: Intl.DateTimeFormatOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-    
-    let dateStr = selectedDate.toLocaleString(language, options);
-  
-    const parts = dateStr.split(' ');
-    const dayOfWeek = parts[0];
-    const month = parts[3];
-  
-    dateStr = dateStr.replace(dayOfWeek, dayOfWeek.charAt(0).toUpperCase() + dayOfWeek.slice(1));
-    dateStr = dateStr.replace(month, month.charAt(0).toUpperCase() + month.slice(1));
-  
-    return dateStr;
-  };
-  
-  
-  
-
   return (
     <>
-    <div className={`max-w-lg mx-auto p-4 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} rounded-lg shadow-lg`}>
-      <div className="flex items-center justify-between mb-4">
-        <button onClick={goToPreviousMonth} className={`px-3 py-1 ${isDarkMode ? 'bg-gray-600 text-white' : 'bg-blue-500 text-white'} rounded-full`}>←</button>
-        <h2 className="text-xl font-semibold">
-          {getMonthName().charAt(0).toUpperCase() + getMonthName().slice(1)} {currentDate.getFullYear()}
-        </h2>
-        <button onClick={goToNextMonth} className={`px-3 py-1 ${isDarkMode ? 'bg-gray-600 text-white' : 'bg-blue-500 text-white'} rounded-full`}>→</button>
-      </div>
-      
-      <div className="text-center mb-4">
-        <button
-          onClick={goToToday}
-          className={`px-4 py-2 ${isDarkMode ? 'bg-gray-600 text-white' : 'bg-green-500 text-white'} rounded-full hover:bg-green-600`}
-        >
-          {language === 'es' ? 'Hoy' : 'Today'}
-        </button>
+      <div className={`max-w-lg mx-auto p-4 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} rounded-lg shadow-lg`}>
+        <div className="flex items-center justify-between mb-4">
+          <MonthNavToggle direction="prev" onClick={goToPreviousMonth} isDarkMode={isDarkMode} />
+          
+          <h2 className="text-xl font-semibold">
+            {getMonthName().charAt(0).toUpperCase() + getMonthName().slice(1)} {currentDate.getFullYear()}
+          </h2>
+          
+          <MonthNavToggle direction="next" onClick={goToNextMonth} isDarkMode={isDarkMode} />
+        </div>
+
+        <div className="text-center mb-4">
+          <TodayButton onClick={goToToday} /> 
+        </div>
+
+        <CalendarGrid 
+          daysOfWeek={daysOfWeek} 
+          calendar={calendar} 
+          isDarkMode={isDarkMode} 
+          selectedDay={selectedDay} 
+          onSelectDay={handleSelectDay} 
+        />
       </div>
 
-      <div className="grid grid-cols-7 gap-2 text-center">
-        {daysOfWeek.map((day, idx) => (
-          <div key={idx} className={`font-small ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{day}</div>
-        ))}
-        {calendar.flat().map((day, idx) => (
-          <div
-            key={idx}
-            onClick={() => day && handleSelectDay(day)} 
-            className={`p-2 ${day ? 
-              `${isDarkMode ? 'bg-gray-700 hover:bg-blue-600' : 'bg-gray-200 hover:bg-blue-100'} rounded-lg cursor-pointer ${selectedDay === day ? 'border-2 border-blue-500' : ''}` 
-              : ''}`}
-          >
-            {day}
-          </div>
-        ))}
-      </div>
-    </div>
-    {selectedDay && ( 
-  <div className={`max-w-lg mx-auto p-4 mt-6 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-500'} rounded-lg shadow-lg`}>
-    <h3 className="text-lg font-semibold mb-2">
-      {language === 'es' ? 'Día seleccionado:' : 'Selected Day:'}
-    </h3>
-    <p className={`text-xl font-semibold ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-700'}`}>
-      {getSelectedDate()}
-    </p>
-  </div>
-)}
-
+      <SelectedDay selectedDay={selectedDay} currentDate={currentDate} isDarkMode={isDarkMode} language={language} />
     </>
   );
 };
