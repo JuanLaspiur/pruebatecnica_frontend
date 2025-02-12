@@ -1,27 +1,24 @@
 'use client';
 
-import { useState } from "react";
 import { useAuth } from "@/contexts/authcontext";
 import { FiLogOut } from "react-icons/fi"; 
 import { useRouter } from "next/navigation";
 import Calendar from "@/components/Calendar";
 import { useLanguage } from "@/contexts/languageContext";
+import { useTheme } from "@/contexts/themeContext";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { logout } = useAuth();
   const { language, setLanguage } = useLanguage();
+  const { isDarkMode, toggleDarkMode } = useTheme();
   const router = useRouter();
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   const handleLogout = () => {
     logout();
     router.push("/login"); 
   };
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle("dark", !isDarkMode);
-  };
+
 
   const toggleLanguage = () => {
     setLanguage(language === "es" ? "en" : "es");
@@ -29,7 +26,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'} flex flex-col`}>
-      <header className="bg-white shadow-md p-4 flex justify-between items-center">
+      <header className={`${isDarkMode ? 'bg-gray-700 text-white' : 'bg-gray-100 text-black'} shadow-md p-4 flex justify-between items-center `}>
         <div className="flex space-x-4">
           <button
             onClick={toggleLanguage}
