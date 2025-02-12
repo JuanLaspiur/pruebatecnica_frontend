@@ -1,24 +1,22 @@
-// app/login/page.tsx
 'use client';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { login } from '../../lib/auth'; // Suponiendo que login está en lib/auth.ts
+import { useAuth } from '@/contexts/authcontext';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const { login } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      const response = await login(email, password);
-      console.log(response)
-      // Si el login es exitoso, redirigir al To-Do list
-      router.push('/todo'); // Redirigir a la página del To-Do
+      await login(email, password);
+      router.push('/todo');
     } catch  {
       setError('Error al iniciar sesión');
     }
