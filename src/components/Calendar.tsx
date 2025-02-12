@@ -53,14 +53,6 @@ const Calendar: React.FC = () => {
     return [calendar, ...weeks];
   };
 
-  const goToNextMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
-  };
-
-  const goToPreviousMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
-  };
-
   const goToToday = () => {
     setCurrentDate(new Date());
     setSelectedDay(new Date().getDate()); 
@@ -76,13 +68,13 @@ const Calendar: React.FC = () => {
     <>
       <div className={`max-w-lg mx-auto p-4 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} rounded-lg shadow-lg`}>
         <div className="flex items-center justify-between mb-4">
-          <MonthNavToggle direction="prev" onClick={goToPreviousMonth} isDarkMode={isDarkMode} />
+          <MonthNavToggle direction="prev" currentDate={currentDate} setCurrentDate={setCurrentDate} isDarkMode={isDarkMode} />
           
           <h2 className="text-xl font-semibold">
             {getMonthName().charAt(0).toUpperCase() + getMonthName().slice(1)} {currentDate.getFullYear()}
           </h2>
           
-          <MonthNavToggle direction="next" onClick={goToNextMonth} isDarkMode={isDarkMode} />
+          <MonthNavToggle direction="next" currentDate={currentDate} setCurrentDate={setCurrentDate} isDarkMode={isDarkMode} />
         </div>
 
         <div className="text-center mb-4">
