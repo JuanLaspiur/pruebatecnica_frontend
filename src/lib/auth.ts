@@ -16,8 +16,9 @@ type LoginResponse = {
 
 export const login = async (email: string, password: string): Promise<LoginResponse> => {
   try {
-    const response = await fetchFromAPI('POST', '/users/login', { email, password });
-
+    const response = await fetchFromAPI('POST', '/users/login', { email, password }) as LoginResponse;
+    localStorage.setItem('user', JSON.stringify(response.user));
+    localStorage.setItem('token', response.token);
     return response as LoginResponse;  
   } catch (error) {
     console.error('Login failed:', error);

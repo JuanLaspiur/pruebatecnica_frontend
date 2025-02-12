@@ -1,8 +1,17 @@
+// app/page.tsx
+'use client';
 
-function Login() {
-  return (
-    <div>page</div>
-  )
-}
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-export default Login
+const HomePage = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('/login');
+  }, [router]);
+
+  return null; 
+};
+
+export default HomePage;

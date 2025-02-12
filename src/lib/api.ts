@@ -5,7 +5,7 @@
     token?: string
   ) => {
     try {
-      const url = `${process.env.BACK_API}/api${endpoint}`;
+      const url = `http://localhost:4000/api${endpoint}`;
       const headers: HeadersInit = {
         'Content-Type': 'application/json',
       };
