@@ -31,12 +31,12 @@ export default function TodoList() {
   });
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-4 bg-white shadow-md rounded-lg">
+    <div className="max-w-md p-4 bg-white shadow-md rounded-lg">
       <div className="flex mb-4">
         <input
           type="text"
           placeholder="New task..."
-          className="flex-1 p-2 border border-gray-300 rounded-l"
+          className="flex-1 mr-3 p-2 border border-gray-300 rounded-l"
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
         />
