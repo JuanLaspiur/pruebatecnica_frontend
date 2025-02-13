@@ -4,7 +4,7 @@ import { useLanguage } from '@/contexts/languageContext';
 import { useTheme } from "@/contexts/themeContext";
 import { useState } from 'react';
 import { generateCalendar } from '@/utils/calendarUtils';
-import { daysOfWeek } from '@/constants/daysOfWeek';
+import { daysOfWeek } from '@/utils/constants/daysOfWeek';
 import { getMonthName } from '@/utils/dateUtils';
 
 import TodayButton from "@/components/buttons/calendar/TodayButton";
