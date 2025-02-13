@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Calendar from "@/components/Calendar";
 import { useTheme } from "@/contexts/themeContext";
 import UpcomingTasks from "@/components/UpcomingTasks";
+import { useLanguage } from '@/contexts/languageContext';
 
 // Lista de tareas hardcodeada
 const hardcodedTasks = [
@@ -20,6 +21,8 @@ const hardcodedTasks = [
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { isDarkMode } = useTheme();
+  const { language } = useLanguage() as { language: "es" | "en" };
+  
 
   return (
     <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'} flex flex-col`}>
@@ -32,7 +35,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           {children}
         </main>
         <aside className="w-1/4 p-4">
-          <UpcomingTasks tasks={hardcodedTasks} isDarkMode={isDarkMode}/>
+          <UpcomingTasks tasks={hardcodedTasks} isDarkMode={isDarkMode} language={language}/>
         </aside>
       </div>
     </div>

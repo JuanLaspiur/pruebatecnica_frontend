@@ -16,9 +16,10 @@ import CalendarGrid from '@/components/subcomponents/calendar/CalendarGrid';
 const Calendar: React.FC = () => {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [selectedDay, setSelectedDay] = useState<number | null>(null); 
+  // TO DO quitar de aqui
   const { language } = useLanguage() as { language: "es" | "en" };
   const { isDarkMode } = useTheme(); 
-
+//
   const calendar = generateCalendar(currentDate);
 
   return (
