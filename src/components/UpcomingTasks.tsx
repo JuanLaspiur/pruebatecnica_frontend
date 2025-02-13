@@ -2,11 +2,12 @@
 import { useState, useEffect } from "react";
 import { Task } from '@/components/TaskList'; 
 import UpcomingTaskItem from "./subcomponents/upcomingtasks/UpcomingTaskItem"; 
+import { UPCOMING_TASKS_TITLE } from "@/utils/constants/UpcomingTasksConstants";
 
 interface UpcomingTasksProps {
   tasks: Task[];
   isDarkMode: boolean;
-  language: string;
+  language: 'en' | 'es';  
 }
 
 export default function UpcomingTasks({ tasks, isDarkMode, language }: UpcomingTasksProps) {
@@ -17,16 +18,8 @@ export default function UpcomingTasks({ tasks, isDarkMode, language }: UpcomingT
     setUpcomingTasks(next7Tasks);
   }, [tasks]);
 
-  const getText = (key: string) => {
-    const texts = {
-      en: {
-        title: 'Upcoming Tasks',
-      },
-      es: {
-        title: 'Próximas Tareas',
-      }
-    };
-    return texts[language]?.[key] || texts.en[key]; 
+  const getText = (key: keyof typeof UPCOMING_TASKS_TITLE['en']) => {  
+    return UPCOMING_TASKS_TITLE[language]?.[key] || UPCOMING_TASKS_TITLE.en[key]; 
   };
 
   return (
@@ -40,4 +33,3 @@ export default function UpcomingTasks({ tasks, isDarkMode, language }: UpcomingT
     </div>
   );
 }
-
