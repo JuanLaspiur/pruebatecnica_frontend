@@ -43,7 +43,7 @@ export default function TaskList() {
   const filteredTasks = filterTasks(tasks, filter, TASK_FILTERS);
 
   return (
-    <div className={`max-w-md p-4 shadow-md rounded-lg ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
+    <div className={`w-[100%] p-4 shadow-md rounded-lg ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
       <TaskInput
         newTask={newTask}
         setNewTask={setNewTask}
