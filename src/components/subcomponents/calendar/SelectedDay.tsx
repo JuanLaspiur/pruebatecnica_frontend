@@ -12,7 +12,7 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ selectedDay, currentDate, isD
   if (!selectedDay) return null;
 
   return (
-    <div className={`mx-auto p-4 mt-6 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-500'} rounded-lg shadow-lg`}>
+    <div className={`mx-auto p-4 mt-4 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-500'} rounded-lg shadow-lg`}>
       <h3 className="text-lg font-semibold mb-2">
         {language === 'es' ? 'Día seleccionado:' : 'Selected Day:'}
       </h3>

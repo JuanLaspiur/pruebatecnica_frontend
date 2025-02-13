@@ -9,15 +9,14 @@ interface ClockProps {
 const Clock: React.FC<ClockProps> = ({ isDarkMode }) => {
   const [time, setTime] = useState<string>('');
 
-  // Función que actualiza la hora con el formato deseado
   const updateTime = () => {
     const now = new Date();
     let hours = now.getHours();
     const minutes = now.getMinutes().toString().padStart(2, '0');
 
-    const ampm = hours >= 12 ? 'PM' : 'AM';  // Determinar AM/PM
-    hours = hours % 12;  // Convertir 24h a 12h
-    hours = hours ? hours : 12;  // Mostrar 12 en lugar de 0
+    const ampm = hours >= 12 ? 'PM' : 'AM';  
+    hours = hours % 12; 
+    hours = hours ? hours : 12; 
     const timeString = `${hours}:${minutes} ${ampm} ${now.toLocaleTimeString('en-US', { timeZoneName: 'short' }).split(' ')[2]}`;
 
     setTime(timeString);

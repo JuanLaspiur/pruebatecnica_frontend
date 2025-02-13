@@ -9,6 +9,7 @@ import { useAuth } from "@/contexts/authcontext";
 import { useLanguage } from '@/contexts/languageContext';
 
 import { useEffect } from "react";
+import Timer from "@/components/Timer";
 
 const hardcodedTasks = [
   { id: 1, text: "Task 1", completed: false },
@@ -41,8 +42,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className={`min-h-screen pb-4 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'} flex flex-col`}>
       <Header isDarkMode={isDarkMode} user={user} language={language}/> 
       <div className="flex flex-1">
-        <aside className="w-1/4 p-4">
+        <aside className="w-1/4 pb-4 px-4">
           <Calendar  isDarkMode={isDarkMode} language={language}/>
+          <Timer isDarkMode={isDarkMode}/>
         </aside>
         <main className="w-2/4 flex p-4">
           {children}

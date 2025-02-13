@@ -53,7 +53,7 @@ export default function TaskList() {
         isDarkMode={isDarkMode}
       />
       <TaskFilter filter={filter} setFilter={setFilter} filterText={filterText} />
-      <ul className={`${isDarkMode ? 'bg-gray-700' : 'bg-gray-100'} rounded-md`}>
+      <ul className={` rounded-md space-y-1`}>
         {filteredTasks.map((task) => (
           <TaskItem key={task.id} task={task} toggleTask={toggleTask} isDarkMode={isDarkMode} />
         ))}
