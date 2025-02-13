@@ -13,7 +13,7 @@ const DarkModeToggle: React.FC = () => {
   return (
     <button
       onClick={handleClick}
-      className={`relative flex items-center justify-between w-16 h-8 p-1 rounded-full transition-all duration-500 ease-in-out ${
+      className={`relative flex items-center justify-between w-16 h-8 mt-1 p-1 rounded-full transition-all duration-500 ease-in-out ${
         isDarkMode ? 'bg-gray-800' : 'bg-yellow-500'
       }`}
     >

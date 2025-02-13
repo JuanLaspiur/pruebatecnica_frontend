@@ -33,7 +33,7 @@ export default function UpcomingTasks({ tasks, isDarkMode, language }: UpcomingT
   });
 
   return (
-    <div className={`max-w-md p-4 shadow-md rounded-lg ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
+    <div className={` p-4 shadow-md rounded-lg ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
       <h2 className="text-xl font-semibold mb-4">{getText('title')}</h2> 
 
       {/* Filtros con FilterButton */}
