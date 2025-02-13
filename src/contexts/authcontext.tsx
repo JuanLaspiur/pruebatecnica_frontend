@@ -1,8 +1,9 @@
 "use client"; 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { useRouter } from "next/navigation"; // Importa el hook useRouter
 import { login as apiLogin, register as apiRegister } from "../lib/auth";
 
-interface User {
+export interface User {
   _id: string;
   name: string;
   email: string;
@@ -32,6 +33,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const router = useRouter(); // Crea una instancia del router
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -63,7 +65,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => {
     setUser(null);
     setToken(null);
-    localStorage.removeItem("user"); 
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    router.push("/login");
   };
 
   return (

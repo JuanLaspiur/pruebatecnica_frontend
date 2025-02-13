@@ -24,6 +24,9 @@ const Calendar: React.FC = () => {
 
   return (
     <>
+    <div className="mb-4">
+      <SelectedDay selectedDay={selectedDay} currentDate={currentDate} isDarkMode={isDarkMode} language={language} />
+      </div>
       <div className={`w-[100%] mx-auto p-4 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} rounded-lg shadow-lg`}>
         <div className="flex items-center justify-between mb-4">
           <MonthNavToggle direction="prev" currentDate={currentDate} setCurrentDate={setCurrentDate} isDarkMode={isDarkMode} />
@@ -35,7 +38,7 @@ const Calendar: React.FC = () => {
           <MonthNavToggle direction="next" currentDate={currentDate} setCurrentDate={setCurrentDate} isDarkMode={isDarkMode} />
         </div>
 
-        <div className="text-center mb-4">
+        <div className="text-center">
           <TodayButton setCurrentDate={setCurrentDate} setSelectedDay={setSelectedDay} /> 
         </div>
         <CalendarGrid 
@@ -47,7 +50,6 @@ const Calendar: React.FC = () => {
         />
       </div>
 
-      <SelectedDay selectedDay={selectedDay} currentDate={currentDate} isDarkMode={isDarkMode} language={language} />
     </>
   );
 };
