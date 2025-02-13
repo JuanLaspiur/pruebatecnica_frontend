@@ -5,7 +5,7 @@ import { Task } from "@/components/TaskList";
 interface UpcomingTaskItemProps {
   task: Task;
   isDarkMode: boolean;
-  language: string;
+  language: 'en' | 'es'; 
 }
 
 export default function UpcomingTaskItem({ task, isDarkMode, language }: UpcomingTaskItemProps) {
