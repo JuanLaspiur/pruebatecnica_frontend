@@ -20,7 +20,7 @@ const LogoutToggle: React.FC = () => {
     <motion.button
       onClick={handleLogout}
       className="flex items-center text-red-500 hover:text-red-700"
-      whileHover={{ scale: 1.1 }}
+      whileHover={{ scale: 1.0 }}
       whileTap={{ scale: 0.9 }}
       transition={{ type: "spring", stiffness: 300 }}
     >

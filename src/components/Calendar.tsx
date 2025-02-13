@@ -22,7 +22,7 @@ const Calendar = ({isDarkMode, language }:CalendarProps) => {
 
   return (
     <>
-    <div className="mb-4">
+    <div className="mb-2">
       <SelectedDay selectedDay={selectedDay} currentDate={currentDate} isDarkMode={isDarkMode} language={language} />
       </div>
       <div className={`w-[100%] mx-auto p-4 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} rounded-lg shadow-lg`}>

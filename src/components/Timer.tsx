@@ -55,7 +55,7 @@ const Timer = ({ isDarkMode }: TimerProps) => {
 
   return (
     <div
-      className={`flex flex-col items-center p-6 rounded-lg w-full mt-4 transition-all ${
+      className={`flex flex-col items-center p-6 rounded-lg w-full mt-2 transition-all ${
         isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'
       }`}
     >
