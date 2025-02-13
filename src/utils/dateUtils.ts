@@ -15,3 +15,10 @@ export const getFormattedSelectedDate = (selectedDay: number | null, currentDate
     dateStr = dateStr.replace(month, month.charAt(0).toUpperCase() + month.slice(1));
     return dateStr;
   };
+
+
+
+  export const getMonthName = (date: Date, language: string): string => {
+    const options: Intl.DateTimeFormatOptions = { month: 'long' };
+    return date.toLocaleString(language, options);
+  };
