@@ -53,14 +53,8 @@ const Calendar: React.FC = () => {
     return [calendar, ...weeks];
   };
 
-  const goToToday = () => {
-    setCurrentDate(new Date());
-    setSelectedDay(new Date().getDate()); 
-  };
 
-  const handleSelectDay = (day: number) => {
-    setSelectedDay(day); 
-  };
+
 
   const calendar = generateCalendar();
 
@@ -78,7 +72,7 @@ const Calendar: React.FC = () => {
         </div>
 
         <div className="text-center mb-4">
-          <TodayButton onClick={goToToday} /> 
+          <TodayButton  setCurrentDate={setCurrentDate} setSelectedDay={setSelectedDay} /> 
         </div>
 
         <CalendarGrid 
@@ -86,7 +80,7 @@ const Calendar: React.FC = () => {
           calendar={calendar} 
           isDarkMode={isDarkMode} 
           selectedDay={selectedDay} 
-          onSelectDay={handleSelectDay} 
+          setSelectedDay={setSelectedDay} 
         />
       </div>
 

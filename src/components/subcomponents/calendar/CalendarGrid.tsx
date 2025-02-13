@@ -5,10 +5,15 @@ interface CalendarGridProps {
   calendar: (number | null)[][];
   isDarkMode: boolean;
   selectedDay: number | null;
-  onSelectDay: (day: number) => void;
+  setSelectedDay: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-const CalendarGrid: React.FC<CalendarGridProps> = ({ daysOfWeek, calendar, isDarkMode, selectedDay, onSelectDay }) => {
+const CalendarGrid: React.FC<CalendarGridProps> = ({ daysOfWeek, calendar, isDarkMode, selectedDay, setSelectedDay }) => {
+
+  const handleSelectDay = (day: number) => {
+    setSelectedDay(day); 
+  };
+
   return (
     <div className="grid grid-cols-7 gap-2 text-center">
       {daysOfWeek.map((day, idx) => (
@@ -17,7 +22,7 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({ daysOfWeek, calendar, isDar
       {calendar.flat().map((day, idx) => (
         <div
           key={idx}
-          onClick={() => day && onSelectDay(day)} 
+          onClick={() => day && handleSelectDay(day)} 
           className={`p-2 ${day ? 
             `${isDarkMode ? 'bg-gray-700 hover:bg-blue-600' : 'bg-gray-200 hover:bg-blue-100'} rounded-lg cursor-pointer ${selectedDay === day ? 'border-2 border-blue-500' : ''}` 
             : ''}`}
