@@ -7,7 +7,6 @@ import UpcomingTasks from "@/components/UpcomingTasks";
 import { useLanguage } from '@/contexts/languageContext';
 import Clock from "@/components/Clock";
 
-// Lista de tareas hardcodeada
 const hardcodedTasks = [
   { id: 1, text: "Task 1", completed: false },
   { id: 2, text: "Task 2", completed: true },
@@ -23,11 +22,11 @@ const hardcodedTasks = [
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { isDarkMode } = useTheme();
   const { language } = useLanguage() as { language: "es" | "en" };
-  
+// si este componente es use client todos los componentes hijos tambien lo son?  
 
   return (
     <div className={`min-h-screen pb-4 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'} flex flex-col`}>
-      <Header />
+      <Header isDarkMode={isDarkMode} />
       <div className="flex flex-1">
         <aside className="w-1/4 p-4">
           <Calendar />
