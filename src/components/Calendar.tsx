@@ -1,7 +1,4 @@
 'use client';
-
-import { useLanguage } from '@/contexts/languageContext';
-import { useTheme } from "@/contexts/themeContext";
 import { useState } from 'react';
 import { generateCalendar } from '@/utils/calendarUtils';
 import { daysOfWeek } from '@/utils/constants/daysOfWeek';
@@ -12,13 +9,14 @@ import SelectedDay from '@/components/subcomponents/calendar/SelectedDay';
 import MonthNavToggle from '@/components/buttons/calendar/MonthNavToggle';  
 import CalendarGrid from '@/components/subcomponents/calendar/CalendarGrid';  
 
-
-const Calendar: React.FC = () => {
+interface CalendarProps {
+  isDarkMode: boolean;
+  language: 'en' | 'es';  
+}
+const Calendar = ({isDarkMode, language }:CalendarProps) => {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [selectedDay, setSelectedDay] = useState<number | null>(new Date().getDate()); 
-  // TO DO quitar de aqui
-  const { language } = useLanguage() as { language: "es" | "en" };
-  const { isDarkMode } = useTheme(); 
+
 //
   const calendar = generateCalendar(currentDate);
 

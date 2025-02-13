@@ -42,7 +42,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <Header isDarkMode={isDarkMode} user={user} language={language}/> 
       <div className="flex flex-1">
         <aside className="w-1/4 p-4">
-          <Calendar />
+          <Calendar  isDarkMode={isDarkMode} language={language}/>
         </aside>
         <main className="w-2/4 flex p-4">
           {children}
