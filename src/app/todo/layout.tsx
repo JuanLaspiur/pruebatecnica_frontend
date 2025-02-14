@@ -39,24 +39,25 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className={`min-h-screen pb-4 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'} flex flex-col`}>
+    <div className={`min-h-screen pb-4 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'}`}>
       <Header isDarkMode={isDarkMode} user={user} language={language}/> 
-      <div className="flex flex-1">
-        <aside className="w-1/4 pb-4 px-2 lg:px-4">
-          <Calendar  isDarkMode={isDarkMode} language={language}/>
+     
+      <div className="flex flex-col md:flex-row">
+        <aside className="md:w-1/4 pb-4 px-2 lg:px-4"> 
+         <Calendar  isDarkMode={isDarkMode} language={language}/>
           <Timer isDarkMode={isDarkMode} language={language}/>
         </aside>
-        <main className="w-2/4 flex p-2 lg:p-4">
+        <main className="md:w-2/4 flex p-2 lg:p-4">
           {children}
         </main>
-        <aside className="w-1/4  p-2 lg:p-4"> 
+        <aside className="md:w-1/4  p-2 lg:p-4"> 
          <Clock isDarkMode={isDarkMode} />
           <div className="mt-2">
             <UpcomingTasks tasks={hardcodedTasks} isDarkMode={isDarkMode} language={language}/>
           </div>
         
         </aside>
-      </div>
+      </div> 
     </div>
   );
 }
