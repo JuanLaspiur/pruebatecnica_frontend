@@ -5,7 +5,7 @@ interface TaskFilterProps {
 }
 
 const TaskFilter = ({ filter, setFilter, filterText }: TaskFilterProps) => (
-  <div className="flex space-x-4 mb-4 text-sm">
+  <div className="flex space-x-4 mb-4 text-sm lg:text-base">
     {["all", "active", "completed"].map((type) => (
       <button
         key={type}
@@ -26,4 +26,5 @@ const TaskFilter = ({ filter, setFilter, filterText }: TaskFilterProps) => (
 );
 
 export default TaskFilter;
+
 

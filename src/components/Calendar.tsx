@@ -25,8 +25,8 @@ const Calendar = ({isDarkMode, language }:CalendarProps) => {
     <div className="mb-2">
       <SelectedDay selectedDay={selectedDay} currentDate={currentDate} isDarkMode={isDarkMode} language={language} />
       </div>
-      <div className={`w-[100%] mx-auto p-4 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} rounded-lg shadow-lg`}>
-      <h2 className="text-lg lg:text-xl font-semibold w-full text-center">
+      <div className={`w-[100%] mx-auto p-2 md:p-4 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} rounded-lg shadow-lg`}>
+   <h2 className="text-lg lg:text-xl font-semibold w-full text-center">
   {getMonthName(currentDate, language).charAt(0).toUpperCase() + getMonthName(currentDate, language).slice(1)} {currentDate.getFullYear()}
 </h2>
 

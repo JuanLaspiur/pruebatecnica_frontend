@@ -5,9 +5,10 @@ import TimerButton from './buttons/timer/TimerButton';
 
 interface TimerProps {
   isDarkMode: boolean;
+  language: 'en' | 'es';  
 }
 
-const Timer = ({ isDarkMode }: TimerProps) => {
+const Timer = ({ isDarkMode, language }: TimerProps) => {
   const [seconds, setSeconds] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
 
@@ -54,12 +55,12 @@ const Timer = ({ isDarkMode }: TimerProps) => {
 
   return (
     <div
-      className={`flex flex-col items-center p-4 rounded-md w-full mt-1 transition-all ${
-        isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'
-      }`}
+      className={`flex flex-col items-center p-4 rounded-md w-full mt-1 transition-all ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}
     >
       <div className="flex justify-between w-full">
-        <h2 className="text-lg font-medium">Cronómetro</h2>
+        <h2 className="text-lg font-medium">
+          {language === 'es' ? 'Cronómetro' : 'Timer'}
+        </h2>
       </div>
       
       <div className="text-2xl font-medium mb-3">
