@@ -25,9 +25,10 @@ const LogoutToggle: React.FC = () => {
       transition={{ type: "spring", stiffness: 300 }}
     >
       <FiLogOut className="mr-2" />
-      {language === "es" ? "Cerrar sesión" : "Logout"}
+      <span className="hidden md:inline">{language === "es" ? "Cerrar sesión" : "Logout"}</span>
     </motion.button>
   );
 };
 
 export default LogoutToggle;
+
