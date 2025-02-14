@@ -7,12 +7,12 @@ import TaskFilter from "./subcomponents/tasklist/TaskFilter";
 import TaskItem from "./subcomponents/tasklist/TaskItem";
 import { TASK_FILTERS, BUTTON_TEXT, PLACEHOLDER_TEXT, FILTER_TEXT } from '@/utils/constants/taskConstants';
 import { filterTasks } from '@/utils/taskUtils';  
+
 export interface Task {
   id: number;
   text: string;
   completed: boolean;
 }
-
 export default function TaskList() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
@@ -43,7 +43,7 @@ export default function TaskList() {
   const filteredTasks = filterTasks(tasks, filter, TASK_FILTERS);
 
   return (
-    <div className={`w-[100%] p-4 shadow-md rounded-lg ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
+    <div className={`w-full max-h-screen p-4 shadow-md rounded-lg ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
       <TaskInput
         newTask={newTask}
         setNewTask={setNewTask}
@@ -53,11 +53,19 @@ export default function TaskList() {
         isDarkMode={isDarkMode}
       />
       <TaskFilter filter={filter} setFilter={setFilter} filterText={filterText} />
-      <ul className={` rounded-md space-y-1`}>
-        {filteredTasks.map((task) => (
-          <TaskItem key={task.id} task={task} toggleTask={toggleTask} isDarkMode={isDarkMode} />
-        ))}
-      </ul>
+      <div className="max-h-[70vh] overflow-auto">
+        <ul className="rounded-md space-y-1">
+          {filteredTasks.length === 0 ? (
+            <li className="text-center text-gray-500">
+              {language === 'es' ? "No hay tareas" : "No tasks available"}
+            </li>
+          ) : (
+            filteredTasks.map((task) => (
+              <TaskItem key={task.id} task={task} toggleTask={toggleTask} isDarkMode={isDarkMode} />
+            ))
+          )}
+        </ul>
+      </div>
     </div>
   );
 }
