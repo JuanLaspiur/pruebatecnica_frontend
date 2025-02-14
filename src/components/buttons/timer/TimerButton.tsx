@@ -11,11 +11,11 @@ const TimerButton: FC<TimerButtonProps> = ({ onClick, icon, disabled }) => {
   const getIcon = () => {
     switch (icon) {
       case 'start':
-        return <RiPlayFill className="text-xl" />;
+        return <RiPlayFill className="text-lg" />;
       case 'stop':
-        return <RiPauseFill className="text-xl" />;
+        return <RiPauseFill className="text-lg" />;
       case 'reset':
-        return <RiRefreshFill className="text-xl" />;
+        return <RiRefreshFill className="text-lg" />;
       default:
         return null;
     }

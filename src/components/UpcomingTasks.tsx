@@ -17,8 +17,7 @@ export default function UpcomingTasks({ tasks, isDarkMode, language }: UpcomingT
   const [filterStatus, setFilterStatus] = useState<'all' | 'completed' | 'pending'>('all'); 
 
   useEffect(() => {
-    const next7Tasks = tasks.slice(0, 7);
-    setUpcomingTasks(next7Tasks);
+    setUpcomingTasks(tasks.slice(0, 5)); // Reduce a 5 tareas
   }, [tasks]);
 
   const getText = (key: keyof typeof UPCOMING_TASKS_TITLE['en']) => {  
@@ -33,32 +32,16 @@ export default function UpcomingTasks({ tasks, isDarkMode, language }: UpcomingT
   });
 
   return (
-    <div className={` p-4 shadow-md rounded-lg ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
-      <h2 className="text-xl font-semibold mb-4">{getText('title')}</h2> 
+    <div className={`p-2 shadow-md rounded-md text-sm ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
+      <h2 className="text-lg font-semibold mb-2">{getText('title')}</h2> 
 
-      {/* Filtros con FilterButton */}
-      <div className="mb-4 flex gap-4 items-center">
-        <FilterButton 
-          icon={FaFilter} 
-          label={language === 'es' ? 'Todas' : 'All'} 
-          onClick={() => setFilterStatus('all')} 
-          active={filterStatus === 'all'} 
-        />
-        <FilterButton 
-          icon={FaCheckCircle} 
-          label={language === 'es' ? 'Completadas' : 'Completed'} 
-          onClick={() => setFilterStatus('completed')} 
-          active={filterStatus === 'completed'} 
-        />
-        <FilterButton 
-          icon={FaTimesCircle} 
-          label={language === 'es' ? 'Pendientes' : 'Pending'} 
-          onClick={() => setFilterStatus('pending')} 
-          active={filterStatus === 'pending'} 
-        />
+      <div className="mb-2 flex gap-2 items-center">
+        <FilterButton icon={FaFilter} label={language === 'es' ? 'Todas' : 'All'} onClick={() => setFilterStatus('all')} active={filterStatus === 'all'} />
+        <FilterButton icon={FaCheckCircle} label={language === 'es' ? 'Completadas' : 'Completed'} onClick={() => setFilterStatus('completed')} active={filterStatus === 'completed'} />
+        <FilterButton icon={FaTimesCircle} label={language === 'es' ? 'Pendientes' : 'Pending'} onClick={() => setFilterStatus('pending')} active={filterStatus === 'pending'} />
       </div>
 
-      <ul className="rounded-md">
+      <ul className="rounded-sm">
         {filteredTasks.map((task) => (
           <UpcomingTaskItem key={task.id} task={task} isDarkMode={isDarkMode} language={language} />
         ))}

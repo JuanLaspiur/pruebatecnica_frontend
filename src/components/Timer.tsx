@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { RiPlayFill, RiPauseFill, RiRefreshFill } from 'react-icons/ri';
 import TimerButton from './buttons/timer/TimerButton';
 
 interface TimerProps {
@@ -55,19 +54,19 @@ const Timer = ({ isDarkMode }: TimerProps) => {
 
   return (
     <div
-      className={`flex flex-col items-center p-6 rounded-lg w-full mt-2 transition-all ${
+      className={`flex flex-col items-center p-4 rounded-md w-full mt-1 transition-all ${
         isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'
       }`}
     >
       <div className="flex justify-between w-full">
-        <h2 className="text-xl font-semibold">Cronómetro</h2>
+        <h2 className="text-lg font-medium">Cronómetro</h2>
       </div>
       
-      <div className="text-3xl font-semibold mb-4">
+      <div className="text-2xl font-medium mb-3">
         <h2>{formatTime(seconds)}</h2>
       </div>
       
-      <div className="flex gap-4">
+      <div className="flex gap-2">
         <TimerButton
           onClick={startTimer}
           icon="start"

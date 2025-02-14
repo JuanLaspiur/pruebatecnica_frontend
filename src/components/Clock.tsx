@@ -29,9 +29,10 @@ const Clock: React.FC<ClockProps> = ({ isDarkMode }) => {
 
   return (
     <div className={`flex items-center justify-center p-6 rounded-lg shadow-xl ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
-      <h2 className="text-4xl font-semibold">{time}</h2>
+      <h2 className="text-3xl font-semibold">{time}</h2>
     </div>
   );
 };
 
 export default Clock;
+

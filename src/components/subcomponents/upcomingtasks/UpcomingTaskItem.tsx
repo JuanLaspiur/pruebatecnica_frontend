@@ -25,11 +25,9 @@ export default function UpcomingTaskItem({ task, isDarkMode, language }: Upcomin
   };
 
   return (
-    <li 
-      className={`flex justify-between p-4 mb-2 rounded-md ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-gray-200 text-black'}`}
-    >
+    <li className={`flex justify-between mb-1 p-2 py-3 text-xs rounded ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-gray-200 text-black'}`}>
       <span>{task.text}</span>
-      <span className={`text-sm ${task.completed ? 'text-green-500' : 'text-red-500'}`}>
+      <span className={` ${task.completed ? 'text-green-500' : 'text-red-500'}`}>
         {getStatusText(task.completed)}
       </span>
     </li>

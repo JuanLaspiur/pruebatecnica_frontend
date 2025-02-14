@@ -23,7 +23,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({ icon: Icon, label, onClick,
     <button 
       onClick={onClick} 
       className={`flex items-center ${buttonColor} 
-       p-1 transition-colors min-w-20 w-auto justify-center`}
+       p-0.5 transition-colors min-w-20 w-auto justify-center text-sm`}
       title={label}
     >
       <Icon className="mr-1" />
