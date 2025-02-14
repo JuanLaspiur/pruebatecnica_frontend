@@ -17,7 +17,7 @@ export default function UpcomingTasks({ tasks, isDarkMode, language }: UpcomingT
   const [filterStatus, setFilterStatus] = useState<'all' | 'completed' | 'pending'>('all'); 
 
   useEffect(() => {
-    setUpcomingTasks(tasks.slice(0, 5)); // Reduce a 5 tareas
+    setUpcomingTasks(tasks.slice(0, 5)); 
   }, [tasks]);
 
   const getText = (key: keyof typeof UPCOMING_TASKS_TITLE['en']) => {  
@@ -35,7 +35,8 @@ export default function UpcomingTasks({ tasks, isDarkMode, language }: UpcomingT
     <div className={`p-2 shadow-md rounded-md text-sm ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
       <h2 className="text-lg font-semibold mb-2">{getText('title')}</h2> 
 
-      <div className="mb-2 flex gap-2 items-center">
+     <div className="mb-2 flex justify-between items-center w-full">
+
         <FilterButton icon={FaFilter} label={language === 'es' ? 'Todas' : 'All'} onClick={() => setFilterStatus('all')} active={filterStatus === 'all'} />
         <FilterButton icon={FaCheckCircle} label={language === 'es' ? 'Completadas' : 'Completed'} onClick={() => setFilterStatus('completed')} active={filterStatus === 'completed'} />
         <FilterButton icon={FaTimesCircle} label={language === 'es' ? 'Pendientes' : 'Pending'} onClick={() => setFilterStatus('pending')} active={filterStatus === 'pending'} />

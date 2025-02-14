@@ -21,14 +21,15 @@ const FilterButton: React.FC<FilterButtonProps> = ({ icon: Icon, label, onClick,
 
   return (
     <button 
-      onClick={onClick} 
-      className={`flex items-center ${buttonColor} 
-       p-0.5 transition-colors min-w-20 w-auto justify-center text-sm`}
-      title={label}
-    >
-      <Icon className="mr-1" />
-      <span className="hidden sm:inline">{label}</span>
-    </button>
+    onClick={onClick} 
+    className={`flex items-center ${buttonColor} 
+      p-0.5 transition-colors w-auto justify-center text-sm max-w-full overflow-hidden`}
+    title={label}
+  >
+    <Icon className="mr-1" />
+    <span className="hidden lg:inline truncate">{label}</span> 
+  </button>
+  
   );
 };
 

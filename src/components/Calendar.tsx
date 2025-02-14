@@ -26,19 +26,18 @@ const Calendar = ({isDarkMode, language }:CalendarProps) => {
       <SelectedDay selectedDay={selectedDay} currentDate={currentDate} isDarkMode={isDarkMode} language={language} />
       </div>
       <div className={`w-[100%] mx-auto p-4 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} rounded-lg shadow-lg`}>
+      <h2 className="text-lg lg:text-xl font-semibold w-full text-center">
+  {getMonthName(currentDate, language).charAt(0).toUpperCase() + getMonthName(currentDate, language).slice(1)} {currentDate.getFullYear()}
+</h2>
+
         <div className="flex items-center justify-between mb-4">
           <MonthNavToggle direction="prev" currentDate={currentDate} setCurrentDate={setCurrentDate} isDarkMode={isDarkMode} />
-          
-          <h2 className="text-xl font-semibold">
-            {getMonthName(currentDate, language).charAt(0).toUpperCase() + getMonthName(currentDate, language).slice(1)} {currentDate.getFullYear()}
-          </h2>
-          
+        
+          <TodayButton setCurrentDate={setCurrentDate} setSelectedDay={setSelectedDay} /> 
           <MonthNavToggle direction="next" currentDate={currentDate} setCurrentDate={setCurrentDate} isDarkMode={isDarkMode} />
         </div>
 
-        <div className="text-center">
-          <TodayButton setCurrentDate={setCurrentDate} setSelectedDay={setSelectedDay} /> 
-        </div>
+    
         <CalendarGrid 
           daysOfWeek={daysOfWeek[language] || daysOfWeek.en} 
           calendar={calendar} 

@@ -36,7 +36,7 @@ const TaskItem = ({ task, toggleTask, isDarkMode }: TaskItemProps) => {
           textDecoration: task.completed ? "line-through" : "none",
         }}
         transition={{ duration: 0.3 }}
-        className="text-lg"
+        className="text-base"
       >
         {task.text}
       </motion.span>
