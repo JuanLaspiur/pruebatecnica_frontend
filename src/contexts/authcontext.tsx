@@ -1,7 +1,7 @@
 "use client"; 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { useRouter } from "next/navigation"; // Importa el hook useRouter
-import { login as apiLogin, register as apiRegister } from "../lib/auth";
+import { login as apiLogin} from "../lib/auth";
 
 export interface User {
   _id: string;
@@ -15,7 +15,6 @@ interface AuthContextType {
   user: User | null;
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
-  register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   setToken: (token: string | null) => void;
 }
@@ -53,14 +52,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const register = async (name: string, email: string, password: string) => {
-    try {
-      await apiRegister(name, email, password);
-    } catch (error) {
-      console.error("Error en registro:", error);
-      throw error;
-    }
-  };
+
 
   const logout = () => {
     setUser(null);
@@ -71,7 +63,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, register, logout, setToken }}>
+    <AuthContext.Provider value={{ user, token, login, logout, setToken }}>
       {children}
     </AuthContext.Provider>
   );

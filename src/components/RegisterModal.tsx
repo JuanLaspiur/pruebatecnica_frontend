@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Input from './subcomponents/common/Input'; 
+import { register } from '@/lib/auth';
 
 interface RegisterModalProps {
   onClose: () => void;
@@ -14,7 +15,7 @@ const RegisterModal = ({ onClose }: RegisterModalProps) => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
 
     if (password !== repeatPassword) {
@@ -22,7 +23,7 @@ const RegisterModal = ({ onClose }: RegisterModalProps) => {
       return;
     }
 
-    console.log({ name, email, password });
+    await register(name, email, password );
     onClose();
   };
 
