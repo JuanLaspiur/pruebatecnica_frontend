@@ -1,17 +1,27 @@
 'use client';
 
 import { useState } from 'react';
+import Input from './subcomponents/common/Input'; 
+
 interface RegisterModalProps {
-    onClose: () => void;
-  }
-  
-const RegisterModal = ({ onClose }:RegisterModalProps) => {
+  onClose: () => void;
+}
+
+const RegisterModal = ({ onClose }: RegisterModalProps) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (password !== repeatPassword) {
+      setError('Las contraseñas no coinciden');
+      return;
+    }
+
     console.log({ name, email, password });
     onClose();
   };
@@ -22,35 +32,44 @@ const RegisterModal = ({ onClose }:RegisterModalProps) => {
         <h2 className="text-2xl font-semibold text-center text-blue-600 mb-4">Registro</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <input 
+            <Input 
               type="text" 
               value={name} 
               onChange={(e) => setName(e.target.value)} 
-              placeholder="Nombre" 
+              placeholder="Full Name" 
               required 
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
           <div>
-            <input 
+            <Input 
               type="email" 
               value={email} 
               onChange={(e) => setEmail(e.target.value)} 
               placeholder="Email" 
               required 
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
           <div>
-            <input 
+            <Input 
               type="password" 
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
-              placeholder="Contraseña" 
+              placeholder="Password" 
               required 
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
+          <div>
+            <Input 
+              type="password" 
+              value={repeatPassword} 
+              onChange={(e) => setRepeatPassword(e.target.value)} 
+              placeholder="Repeat Password" 
+              required 
+            />
+          </div>
+
+          {error && <p className="text-red-500 text-sm">{error}</p>}
+
           <div>
             <button 
               type="submit" 

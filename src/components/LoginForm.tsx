@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Input  from './subcomponents/common/Input';
 
 interface LoginFormProps {
   onSubmit: (email: string, password: string) => void;
@@ -22,26 +23,24 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, error, onOpenRegisterMo
       <h1 className="text-3xl font-semibold text-center text-blue-600 mb-6">Login</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <input 
-            type="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-            placeholder="Email" 
-            required 
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          <Input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            required
           />
         </div>
         <div>
-          <input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            placeholder="Password" 
-            required 
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          <Input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            required
           />
         </div>
-        {error && <p className="text-red-500 text-sm">{error}</p>}
+       
         <div>
           <button 
             type="submit" 
@@ -55,11 +54,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, error, onOpenRegisterMo
       <p className="mt-4 text-center text-sm">
         ¿No tienes una cuenta? <button className="text-blue-600 hover:underline" onClick={onOpenRegisterModal}>Regístrate</button>
       </p>
+      {error && <p className="pt-5 text-center text-red-500 text-sm">{error}</p>}
     </div>
   );
 };
 
 export default LoginForm;
-
-
-
