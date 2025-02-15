@@ -5,6 +5,7 @@ import Input from './subcomponents/common/Input';
 import { register } from '@/lib/auth';
 import ErrorModal from './subcomponents/common/ErrorModal';
 import SuccessModal from './subcomponents/common/SuccessModal';
+import { validateEmail } from '@/utils/validators';
 
 interface RegisterModalProps {
   onClose: () => void;
@@ -26,16 +27,21 @@ const RegisterModal = ({ onClose }: RegisterModalProps) => {
       return;
     }
 
+    if (!validateEmail(email)) {
+      setError('El correo electrónico no es válido');
+      return;
+    }
+
     try {
       const result = await register(name, email, password);
       if (result.error) {
         setError('El correo electrónico ya está registrado.');
       } else {
         setShowSuccessModal(true);
-      setTimeout(() => {
-        setShowSuccessModal(false);
-         onClose();
-       }, 1500); 
+        setTimeout(() => {
+          setShowSuccessModal(false);
+          onClose();
+        }, 1500);
       }
     } catch (error) {
       console.error(error);
