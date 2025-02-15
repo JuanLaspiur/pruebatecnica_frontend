@@ -45,10 +45,8 @@ export const register = async (name: string, email: string, password: string): P
     const response = await fetchFromAPI('POST', '/users', { name, email, password });
 
     if ('error' in response) {
-      alert(response.message); 
       return response;
     }
-
     return response as RegisterResponse;
 
   } catch (error) {

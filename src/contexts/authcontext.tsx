@@ -1,6 +1,6 @@
 "use client"; 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { useRouter } from "next/navigation"; // Importa el hook useRouter
+import { useRouter } from "next/navigation"; 
 import { login as apiLogin} from "../lib/auth";
 
 export interface User {
