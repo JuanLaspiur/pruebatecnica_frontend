@@ -1,8 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-
-const RegisterModal = ({ onClose }) => {
+interface RegisterModalProps {
+    onClose: () => void;
+  }
+  
+const RegisterModal = ({ onClose }:RegisterModalProps) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
