@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { isToday, parseISO } from "date-fns";
 
 import TaskInput from "./subcomponents/tasklist/TaskInput";
 import TaskFilter from "./subcomponents/tasklist/TaskFilter";
@@ -15,18 +16,17 @@ interface TaskListProps  {
   token:  string | null  
 }
 
-export default function TaskList({isDarkMode, language, token}:TaskListProps) {
+export default function TaskList({ isDarkMode, language, token }: TaskListProps) {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
   const [newTask, setNewTask] = useState("");
-  
 
   useEffect(() => {
     const fetchAllTasks = async () => {
       if (token) {
         try {
           const result = await getAllMyTask(token);
-          if (result !== null && result !== undefined) {
+          if (result) {
             setTasks(result);
           } else {
             console.error('No tasks found');
@@ -38,21 +38,15 @@ export default function TaskList({isDarkMode, language, token}:TaskListProps) {
         console.error('Token no disponible');
       }
     };
-  
+
     fetchAllTasks();
   }, [token]);
-  
 
-  const addTask = async() => {
+  const addTask = async () => {
     if (newTask.trim() === "") return;
-    const task: Task = { 
-      _id: Date.now().toString(),
-      title: newTask, 
-      description: "", 
-    };
 
-    await createTask(token, newTask);
-    setTasks([...tasks, task]);
+    const result = await createTask(token, newTask);
+    if (result) setTasks([...tasks, result]);
     setNewTask("");
   };
 
@@ -64,7 +58,7 @@ export default function TaskList({isDarkMode, language, token}:TaskListProps) {
 
   const deleteTaskFromList = async (id: string) => {
     try {
-      await deleteTask(token,id);
+      await deleteTask(token, id);
       setTasks(tasks.filter((task) => task._id !== id));
     } catch (error) {
       console.error('Error deleting task:', error);
@@ -80,7 +74,9 @@ export default function TaskList({isDarkMode, language, token}:TaskListProps) {
       : FILTER_TEXT.EN[type];
   };
 
-  const filteredTasks = filterTasks(tasks, filter, TASK_FILTERS);
+  const filteredTasks = filterTasks(tasks, filter, TASK_FILTERS).filter(task => 
+    task.dueDate && isToday(parseISO(task.dueDate))
+  );
 
   return (
     <div className={`w-full max-h-screen p-4 shadow-md rounded-lg ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
@@ -97,7 +93,7 @@ export default function TaskList({isDarkMode, language, token}:TaskListProps) {
         <ul className="rounded-md space-y-1">
           {filteredTasks.length === 0 ? (
             <li className="text-center text-gray-500">
-              {language === 'es' ? "No hay tareas" : "No tasks available"}
+              {language === 'es' ? "No hay tareas para hoy" : "No tasks for today"}
             </li>
           ) : (
             filteredTasks.map((task) => (
