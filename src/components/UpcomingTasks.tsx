@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from "react";
-import { Task } from '@/components/TaskList'; 
+import { Task } from "@/lib/task"; 
 import UpcomingTaskItem from "./subcomponents/upcomingtasks/UpcomingTaskItem"; 
 import { UPCOMING_TASKS_TITLE } from "@/utils/constants/UpcomingTasksConstants";
 import { FaCheckCircle, FaTimesCircle, FaFilter } from 'react-icons/fa'; 
@@ -44,7 +44,7 @@ export default function UpcomingTasks({ tasks, isDarkMode, language }: UpcomingT
 
       <ul className="rounded-sm">
         {filteredTasks.map((task) => (
-          <UpcomingTaskItem key={task.id} task={task} isDarkMode={isDarkMode} language={language} />
+          <UpcomingTaskItem key={task._id} task={task} isDarkMode={isDarkMode} language={language} />
         ))}
       </ul>
     </div>

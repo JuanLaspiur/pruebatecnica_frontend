@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FaRegCalendarAlt } from 'react-icons/fa'; 
 import { getFormattedSelectedDate } from '@/utils/dateUtils';
-import { Task } from "@/lib/task"; 
 import ErrorModal from '../common/ErrorModal'; 
 import TaskModal from './TaskModal'; 
 import { createTask2 } from '@/lib/task';

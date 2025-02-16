@@ -1,6 +1,6 @@
 'use client';
 
-import { Task } from "@/components/TaskList";
+import { Task } from "@/lib/task";
 
 interface UpcomingTaskItemProps {
   task: Task;
@@ -10,7 +10,7 @@ interface UpcomingTaskItemProps {
 
 export default function UpcomingTaskItem({ task, isDarkMode, language }: UpcomingTaskItemProps) {
 
-  const getStatusText = (completed: boolean) => {
+  const getStatusText = (completed: boolean | undefined) => {
     const texts = {
       en: {
         completed: 'Completed',
@@ -26,9 +26,9 @@ export default function UpcomingTaskItem({ task, isDarkMode, language }: Upcomin
 
   return (
     <li className={`flex justify-between mb-1 p-2 py-3 text-xs rounded ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-gray-200 text-black'}`}>
-      <span>{task.text}</span>
+      <span>{task.title}</span>
       <span className={` ${task.completed ? 'text-green-500' : 'text-red-500'}`}>
-        {getStatusText(task.completed)}
+        {getStatusText(task?.completed)}
       </span>
     </li>
   );

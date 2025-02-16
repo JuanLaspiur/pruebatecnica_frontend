@@ -7,32 +7,44 @@ import Clock from "@/components/Clock";
 import { useTheme } from "@/contexts/themeContext";
 import { useAuth } from "@/contexts/authcontext";
 import { useLanguage } from '@/contexts/languageContext';
-
-import { useEffect } from "react";
+import { Task } from "@/lib/task";
+import { useEffect, useState } from "react";
 import Timer from "@/components/Timer";
+import { getAllMyTask } from "@/lib/task";
 
-const hardcodedTasks = [
-  { id: 1, text: "Task 1", completed: false },
-  { id: 2, text: "Task 2", completed: true },
-  { id: 3, text: "Task 3", completed: false },
-  { id: 4, text: "Task 4", completed: true },
-  { id: 5, text: "Task 5", completed: false },
-  { id: 6, text: "Task 6", completed: true },
-  { id: 7, text: "Task 7", completed: false },
-  { id: 8, text: "Task 8", completed: false },
-  { id: 9, text: "Task 9", completed: true },
-];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { isDarkMode } = useTheme();
   const { language } = useLanguage() as { language: "es" | "en" };
   const { user, token, logout } = useAuth();
+  const  [tasks, setTask] = useState<Task[]>([]);
 
   useEffect(() => {
     if (!user || !token) {
       logout();
     }
   }, []); 
+
+   useEffect(() => {
+      const fetchAllTasks = async () => {
+        if (token) {
+          try {
+            const result = await getAllMyTask(token);
+            if (result !== null && result !== undefined) {
+              setTask(result);
+            } else {
+              console.error('No tasks found');
+            }
+          } catch (error) {
+            console.error('Error fetching tasks:', error);
+          }
+        } else {
+          console.error('Token no disponible');
+        }
+      };
+    
+      fetchAllTasks();
+    }, [token]);
 
   if(!user){
     return null
@@ -53,7 +65,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <aside className="md:w-1/4  p-2 lg:p-4"> 
          <Clock isDarkMode={isDarkMode} />
           <div className="mt-2">
-            <UpcomingTasks tasks={hardcodedTasks} isDarkMode={isDarkMode} language={language}/>
+            <UpcomingTasks tasks={tasks} isDarkMode={isDarkMode} language={language}/>
           </div>
         
         </aside>
