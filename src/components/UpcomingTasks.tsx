@@ -1,69 +1,66 @@
 'use client';
-import { useState, useEffect } from "react";
-import { startOfWeek, endOfWeek, format } from "date-fns"; 
-import { Task } from "@/lib/task"; 
-import UpcomingTaskItem from "./subcomponents/upcomingtasks/UpcomingTaskItem"; 
-import { UPCOMING_TASKS_TITLE } from "@/utils/constants/UpcomingTasksConstants";
-import { FaCheckCircle, FaTimesCircle, FaFilter, FaRedo  } from 'react-icons/fa'; 
+
+import { FaCheckCircle, FaTimesCircle, FaFilter, FaRedo } from 'react-icons/fa';
 import FilterButton from './buttons/upcomingtasks/FilterButton';
+import UpcomingTaskItem from './subcomponents/upcomingtasks/UpcomingTaskItem';
+import { Task } from '@/lib/task';
+import { useUpcomingTasks } from '@/hooks/useUpcomingTasks';
 
 interface UpcomingTasksProps {
   tasks: Task[];
   isDarkMode: boolean;
-  language: 'en' | 'es';  
-  fetchAllTasks:() => void
+  language: 'en' | 'es';
+  fetchAllTasks: () => void;
 }
 
-export default function UpcomingTasks({ tasks, isDarkMode, language, fetchAllTasks }: UpcomingTasksProps) {
-  const [upcomingTasks, setUpcomingTasks] = useState<Task[]>([]);
-  const [filterStatus, setFilterStatus] = useState<'all' | 'completed' | 'pending'>('all'); 
-  const startDate = format(startOfWeek(new Date(), { weekStartsOn: 1 }), 'dd/MM'); 
-const endDate = format(endOfWeek(new Date(), { weekStartsOn: 1 }), 'dd/MM');
-useEffect(() => {
-  const startOfWeekDate = startOfWeek(new Date(), { weekStartsOn: 1 });
-  const endOfWeekDate = endOfWeek(new Date(), { weekStartsOn: 1 });
-
-  const upcomingThisWeek = tasks.filter(task => {
-    if (!task.dueDate) return false;
-
-    const taskDueDate = typeof task.dueDate === "string" ? new Date(task.dueDate) : task.dueDate;
-
-    return taskDueDate >= startOfWeekDate && taskDueDate <= endOfWeekDate;
-  });
-
-  setUpcomingTasks(upcomingThisWeek.slice(0, 5));
-}, [tasks]);
-
-  const getText = (key: keyof typeof UPCOMING_TASKS_TITLE['en']) => {  
-    return UPCOMING_TASKS_TITLE[language]?.[key] || UPCOMING_TASKS_TITLE.en[key]; 
-  };
-
-  const filteredTasks = upcomingTasks.filter((task) => {
-    if (filterStatus === 'all') return true;
-    if (filterStatus === 'completed') return task.completed;
-    if (filterStatus === 'pending') return !task.completed;
-    return true;
-  });
+export default function UpcomingTasks({
+  tasks,
+  isDarkMode,
+  language,
+  fetchAllTasks,
+}: UpcomingTasksProps) {
+  const {
+    filteredTasks,
+    startDate,
+    endDate,
+    filterStatus,
+    setFilterStatus,
+    getText,
+  } = useUpcomingTasks(tasks, language);
 
   return (
-    <div className={`p-2 shadow-md rounded-md text-sm ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
-     <div className="flex justify-between items-center">
-      <h2 className="text-lg font-semibold">{getText('title')}</h2>
-      <button 
-        className="text-gray-500 hover:text-gray-700 transition px-1"
-        onClick={fetchAllTasks} 
-      >
-        <FaRedo size={16} />
-      </button>
-    </div>
+    <div
+      className={`p-2 shadow-md rounded-md text-sm ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}
+    >
+      <div className="flex justify-between items-center">
+        <h2 className="text-lg font-semibold">{getText('title')}</h2>
+        <button className="text-gray-500 hover:text-gray-700 transition px-1" onClick={fetchAllTasks}>
+          <FaRedo size={16} />
+        </button>
+      </div>
       <p className="text-xs text-gray-500 mb-2">{`${startDate} - ${endDate}`}</p>
-     <div className="mb-2 flex justify-between items-center w-full">
-        <FilterButton icon={FaFilter} label={language === 'es' ? 'Todas' : 'All'} onClick={() => setFilterStatus('all')} active={filterStatus === 'all'} />
-        <FilterButton icon={FaCheckCircle} label={language === 'es' ? 'Completadas' : 'Completed'} onClick={() => setFilterStatus('completed')} active={filterStatus === 'completed'} />
-        <FilterButton icon={FaTimesCircle} label={language === 'es' ? 'Pendientes' : 'Pending'} onClick={() => setFilterStatus('pending')} active={filterStatus === 'pending'} />
+      <div className="mb-2 flex justify-between items-center w-full">
+        <FilterButton
+          icon={FaFilter}
+          label={language === 'es' ? 'Todas' : 'All'}
+          onClick={() => setFilterStatus('all')}
+          active={filterStatus === 'all'}
+        />
+        <FilterButton
+          icon={FaCheckCircle}
+          label={language === 'es' ? 'Completadas' : 'Completed'}
+          onClick={() => setFilterStatus('completed')}
+          active={filterStatus === 'completed'}
+        />
+        <FilterButton
+          icon={FaTimesCircle}
+          label={language === 'es' ? 'Pendientes' : 'Pending'}
+          onClick={() => setFilterStatus('pending')}
+          active={filterStatus === 'pending'}
+        />
       </div>
 
-      <ul className="rounded-sm"> 
+      <ul className="rounded-sm">
         {filteredTasks.map((task) => (
           <UpcomingTaskItem key={task._id} task={task} isDarkMode={isDarkMode} language={language} />
         ))}
