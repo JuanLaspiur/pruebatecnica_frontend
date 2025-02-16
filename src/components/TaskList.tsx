@@ -1,5 +1,5 @@
 'use client';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLanguage } from '@/contexts/languageContext';
 import { useTheme } from "@/contexts/themeContext";
 import TaskInput from "./subcomponents/tasklist/TaskInput";
@@ -7,6 +7,8 @@ import TaskFilter from "./subcomponents/tasklist/TaskFilter";
 import TaskItem from "./subcomponents/tasklist/TaskItem";
 import { TASK_FILTERS, BUTTON_TEXT, PLACEHOLDER_TEXT, FILTER_TEXT } from '@/utils/constants/taskConstants';
 import { filterTasks } from '@/utils/taskUtils';  
+import { getAllMyTask } from "@/lib/task";
+import { useAuth } from "@/contexts/authcontext";
 
 export interface Task {
   id: number;
@@ -17,8 +19,25 @@ export default function TaskList() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
   const [newTask, setNewTask] = useState("");
+  // TO - DO quitar de aqui
   const { language } = useLanguage();
   const { isDarkMode } = useTheme();
+// hasta aqui
+const { token } = useAuth();
+
+  useEffect(()=>{
+    const fetchAllTasks = async () => {
+      if (token) {  
+        const result = await getAllMyTask(token);
+        console.log(result); 
+      } else {
+        console.error('Token no disponible');
+      }
+    };
+    fetchAllTasks()
+  },[])
+
+
 
   const addTask = () => {
     if (newTask.trim() === "") return;
