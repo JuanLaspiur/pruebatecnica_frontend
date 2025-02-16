@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaRegCalendarAlt } from 'react-icons/fa'; 
 import { getFormattedSelectedDate } from '@/utils/dateUtils';
 import { Task } from "@/lib/task"; 
 import ErrorModal from '../common/ErrorModal'; 
@@ -67,19 +68,21 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ selectedDay, currentDate, isD
       </p>
       <button
         onClick={handleAddTaskClick}
-        className={`mt-2 p-2 bg-blue-500 text-white rounded-md ${isDarkMode ? 'bg-blue-600 hover:bg-blue-500' : 'bg-blue-500 hover:bg-blue-600'}`}
+        className={`mt-2 p-2 flex items-center gap-2 bg-blue-500 text-white rounded-md ${isDarkMode ? 'bg-blue-600 hover:bg-blue-500' : 'bg-blue-500 hover:bg-blue-600'}`}
       >
+        <FaRegCalendarAlt /> 
         {language === 'es' ? 'Agregar tarea postergada' : 'Add Task'}
       </button>
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-20 flex justify-center items-center">
           <div className={` ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-500'} p-4 rounded-lg shadow-md max-w-md w-full`}>
-            <h3 className="text-xl font-semibold mb-4">
-              {language === 'es' ? 'Nueva tarea' : 'New Task'}
-            </h3>
+          <h3 className="text-xl font-semibold mb-4 flex items-center gap-2"><FaRegCalendarAlt />
+  {language === 'es' ? 'Nueva tarea' : 'New Task'}
+</h3>
+
             <p className={`text-sm ${isDarkMode ? 'text-white' : 'text-gray-700'} mb-4`}>
-              {language === 'es' ? 'Tarea para el día:' : 'Task for the day:'} {getFormattedSelectedDate(selectedDay, currentDate, language)}
+             {language === 'es' ? 'Tarea para el día:' : 'Task for the day:'} {getFormattedSelectedDate(selectedDay, currentDate, language)}
             </p>
             <input
               type="text"

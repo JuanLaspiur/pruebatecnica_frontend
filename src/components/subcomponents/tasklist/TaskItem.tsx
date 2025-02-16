@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Task } from "@/lib/task";
-import { FiTrash2 } from "react-icons/fi";  // Importamos el icono del tacho de basura
+import { FiTrash2 } from "react-icons/fi"; 
 
 interface TaskItemProps {
   task: Task;
