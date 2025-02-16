@@ -80,3 +80,29 @@ export const deleteTask = async(token:string | null, taskId:string): Promise<Tas
     return null;
   }
 };
+
+
+export const updateTask = async (
+  token: string | null,
+  taskId: string,
+  data: Partial<Task> 
+): Promise<Task | null> => {
+  if (!token) {
+    return null;
+  }
+
+  try {
+    const response = await fetchFromAPI("PUT", `/tasks/id/${taskId}`, data, token);
+    
+    if (!response) {
+      throw new Error("No se recibió una respuesta del servidor.");
+    }
+
+    const task: Task = response; 
+    return task;
+
+  } catch (error) {
+    console.error("Error al actualizar la tarea:", error);
+    return null;
+  }
+};

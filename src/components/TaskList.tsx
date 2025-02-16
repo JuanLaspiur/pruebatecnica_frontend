@@ -6,7 +6,7 @@ import TaskFilter from "./subcomponents/tasklist/TaskFilter";
 import TaskItem from "./subcomponents/tasklist/TaskItem";
 import { TASK_FILTERS, BUTTON_TEXT, PLACEHOLDER_TEXT, FILTER_TEXT } from '@/utils/constants/taskConstants';
 import { filterTasks } from '@/utils/taskUtils';  
-import { getAllMyTask, createTask, deleteTask } from "@/lib/task";
+import { getAllMyTask, createTask, deleteTask, updateTask } from "@/lib/task";
 
 import { Task } from "@/lib/task";
 
@@ -50,11 +50,27 @@ export default function TaskList({ isDarkMode, language, token }: TaskListProps)
     setNewTask("");
   };
 
-  const toggleTask = (id: string) => {
-    setTasks(tasks.map((task) => 
-      task._id === id ? { ...task, completed: !task.completed } : task
-    ));
+  const toggleTask = async (id: string) => {
+    try {
+      const taskToUpdate = tasks.find((task) => task._id === id);
+      if (taskToUpdate) {
+        const updatedTask = { ...taskToUpdate, completed: !taskToUpdate.completed };
+  
+        const result = await updateTask(token, id,updatedTask);
+  
+        if (result) {
+          setTasks(tasks.map((task) => 
+            task._id === id ? { ...task, completed: updatedTask.completed } : task
+          ));
+        } else {
+          console.error('Error updating task');
+        }
+      }
+    } catch (error) {
+      console.error('Error toggling task:', error);
+    }
   };
+  
 
   const deleteTaskFromList = async (id: string) => {
     try {
