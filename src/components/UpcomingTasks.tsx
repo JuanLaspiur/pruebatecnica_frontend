@@ -4,16 +4,17 @@ import { startOfWeek, endOfWeek, format } from "date-fns";
 import { Task } from "@/lib/task"; 
 import UpcomingTaskItem from "./subcomponents/upcomingtasks/UpcomingTaskItem"; 
 import { UPCOMING_TASKS_TITLE } from "@/utils/constants/UpcomingTasksConstants";
-import { FaCheckCircle, FaTimesCircle, FaFilter } from 'react-icons/fa'; 
+import { FaCheckCircle, FaTimesCircle, FaFilter, FaRedo  } from 'react-icons/fa'; 
 import FilterButton from './buttons/upcomingtasks/FilterButton';
 
 interface UpcomingTasksProps {
   tasks: Task[];
   isDarkMode: boolean;
   language: 'en' | 'es';  
+  fetchAllTasks:() => void
 }
 
-export default function UpcomingTasks({ tasks, isDarkMode, language }: UpcomingTasksProps) {
+export default function UpcomingTasks({ tasks, isDarkMode, language, fetchAllTasks }: UpcomingTasksProps) {
   const [upcomingTasks, setUpcomingTasks] = useState<Task[]>([]);
   const [filterStatus, setFilterStatus] = useState<'all' | 'completed' | 'pending'>('all'); 
   const startDate = format(startOfWeek(new Date(), { weekStartsOn: 1 }), 'dd/MM'); 
@@ -46,7 +47,15 @@ useEffect(() => {
 
   return (
     <div className={`p-2 shadow-md rounded-md text-sm ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
-      <h2 className="text-lg font-semibold ">{getText('title')}</h2> 
+     <div className="flex justify-between items-center">
+      <h2 className="text-lg font-semibold">{getText('title')}</h2>
+      <button 
+        className="text-gray-500 hover:text-gray-700 transition px-1"
+        onClick={fetchAllTasks} 
+      >
+        <FaRedo size={16} />
+      </button>
+    </div>
       <p className="text-xs text-gray-500 mb-2">{`${startDate} - ${endDate}`}</p>
      <div className="mb-2 flex justify-between items-center w-full">
         <FilterButton icon={FaFilter} label={language === 'es' ? 'Todas' : 'All'} onClick={() => setFilterStatus('all')} active={filterStatus === 'all'} />

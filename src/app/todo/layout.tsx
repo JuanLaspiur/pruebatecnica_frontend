@@ -24,9 +24,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       logout();
     }
   }, []); 
-
-   useEffect(() => {
-      const fetchAllTasks = async () => {
+const fetchAllTasks = async () => {
         if (token) {
           try {
             const result = await getAllMyTask(token);
@@ -42,7 +40,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           console.error('Token no disponible');
         }
       };
-    
+   useEffect(() => {
       fetchAllTasks();
     }, [token]);
 
@@ -65,7 +63,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <aside className="md:w-1/4  p-2 lg:p-4"> 
          <Clock isDarkMode={isDarkMode} />
           <div className="mt-2">
-            <UpcomingTasks tasks={tasks} isDarkMode={isDarkMode} language={language}/>
+            <UpcomingTasks tasks={tasks} isDarkMode={isDarkMode} language={language} fetchAllTasks={fetchAllTasks}/>
           </div>
         
         </aside>
