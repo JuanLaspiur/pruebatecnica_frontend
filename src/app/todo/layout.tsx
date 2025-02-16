@@ -1,10 +1,6 @@
 'use client';
 import { useEffect, useState } from "react";
-import Header from "@/components/Header";
-import Calendar from "@/components/Calendar";
-import UpcomingTasks from "@/components/UpcomingTasks";
-import Clock from "@/components/Clock";
-import Timer from "@/components/Timer";
+import { Header, Calendar, UpcomingTasks, Clock, Timer} from "@/components";
 import { useAuth,  useLanguage, useTheme } from "@/contexts";
 import {Task, getAllMyTask } from "@/lib/task";
 

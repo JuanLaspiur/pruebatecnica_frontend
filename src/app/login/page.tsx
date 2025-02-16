@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/authcontext';
-import RegisterModal from '@/components/RegisterModal';
-import LoginForm from '@/components/LoginForm';
+import { RegisterModal, LoginForm } from '@/components';
 
 const LoginPage = () => {
   const [error, setError] = useState<string | null>(null);
