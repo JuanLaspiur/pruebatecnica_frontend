@@ -17,7 +17,6 @@ export const getAllMyTask = async (token: string): Promise<Task[] | null> => {
     const response = await fetchFromAPI('GET', '/tasks',undefined,token);
     if (!response) {
       throw new Error(`Error en la solicitud: ${response.status}`);
-      // TO-DO verificar errores
     }
     const tasks: Task[] = response;
     return tasks;

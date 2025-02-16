@@ -11,43 +11,69 @@ import { getAllMyTask } from "@/lib/task";
 import { useAuth } from "@/contexts/authcontext";
 
 export interface Task {
-  id: number;
-  text: string;
+  _id: string;
+  title: string;
+  description: string;
   completed: boolean;
+  status: string;
+  user: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
+
 export default function TaskList() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
   const [newTask, setNewTask] = useState("");
-  // TO - DO quitar de aqui
+  
   const { language } = useLanguage();
   const { isDarkMode } = useTheme();
-// hasta aqui
-const { token } = useAuth();
+  const { token } = useAuth();
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchAllTasks = async () => {
-      if (token) {  
-        const result = await getAllMyTask(token);
-        console.log(result); 
+      if (token) {
+        try {
+          const result = await getAllMyTask(token);
+          if (result !== null && result !== undefined) {
+            setTasks(result);
+          } else {
+            console.error('No tasks found');
+          }
+        } catch (error) {
+          console.error('Error fetching tasks:', error);
+        }
       } else {
         console.error('Token no disponible');
       }
     };
-    fetchAllTasks()
-  },[])
-
-
+  
+    fetchAllTasks();
+  }, [token]);
+  
 
   const addTask = () => {
     if (newTask.trim() === "") return;
-    const task: Task = { id: Date.now(), text: newTask, completed: false };
+    const task: Task = { 
+      _id: Date.now().toString(),
+      title: newTask, 
+      description: "", 
+      completed: false, 
+      status: "pendiente", 
+      user: "", 
+      createdAt: new Date().toISOString(), 
+      updatedAt: new Date().toISOString(),
+      __v: 0
+    };
     setTasks([...tasks, task]);
     setNewTask("");
   };
 
-  const toggleTask = (id: number) => {
-    setTasks(tasks.map((task) => (task.id === id ? { ...task, completed: !task.completed } : task)));
+  const toggleTask = (id: string) => {
+    setTasks(tasks.map((task) => 
+      task._id === id ? { ...task, completed: !task.completed } : task
+    ));
   };
 
   const buttonText = language === 'es' ? BUTTON_TEXT.ES : BUTTON_TEXT.EN;
@@ -80,7 +106,7 @@ const { token } = useAuth();
             </li>
           ) : (
             filteredTasks.map((task) => (
-              <TaskItem key={task.id} task={task} toggleTask={toggleTask} isDarkMode={isDarkMode} />
+              <TaskItem key={task._id} task={task} toggleTask={toggleTask} isDarkMode={isDarkMode} />
             ))
           )}
         </ul>
