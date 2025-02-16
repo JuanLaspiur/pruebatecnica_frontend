@@ -45,3 +45,21 @@ export const createTask = async (token:string | null, title:string): Promise<Tas
     return null;
   }
 };
+
+
+export const deleteTask = async(token:string | null, taskId:string): Promise<Task | null> => {
+  if(!token) {
+    return null
+  }
+  try {
+    const response = await fetchFromAPI('DELETE', `/tasks/id/${taskId}`,{}, token);
+    if (!response) {
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+    const tasks: Task = response;
+    return tasks;
+  } catch (error) {
+    console.error('Error al eliminar la tarea:', error);
+    return null;
+  }
+};

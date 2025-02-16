@@ -1,4 +1,3 @@
-'use client';
 import { useState, useEffect } from "react";
 
 import TaskInput from "./subcomponents/tasklist/TaskInput";
@@ -6,7 +5,7 @@ import TaskFilter from "./subcomponents/tasklist/TaskFilter";
 import TaskItem from "./subcomponents/tasklist/TaskItem";
 import { TASK_FILTERS, BUTTON_TEXT, PLACEHOLDER_TEXT, FILTER_TEXT } from '@/utils/constants/taskConstants';
 import { filterTasks } from '@/utils/taskUtils';  
-import { getAllMyTask, createTask } from "@/lib/task";
+import { getAllMyTask, createTask, deleteTask } from "@/lib/task";
 
 import { Task } from "@/lib/task";
 
@@ -15,6 +14,7 @@ interface TaskListProps  {
   language: string;
   token:  string | null  
 }
+
 export default function TaskList({isDarkMode, language, token}:TaskListProps) {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
@@ -62,6 +62,15 @@ export default function TaskList({isDarkMode, language, token}:TaskListProps) {
     ));
   };
 
+  const deleteTaskFromList = async (id: string) => {
+    try {
+      await deleteTask(token,id);
+      setTasks(tasks.filter((task) => task._id !== id));
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
+  };
+
   const buttonText = language === 'es' ? BUTTON_TEXT.ES : BUTTON_TEXT.EN;
   const placeholderText = language === 'es' ? PLACEHOLDER_TEXT.ES : PLACEHOLDER_TEXT.EN;
 
@@ -92,7 +101,13 @@ export default function TaskList({isDarkMode, language, token}:TaskListProps) {
             </li>
           ) : (
             filteredTasks.map((task) => (
-              <TaskItem key={task._id} task={task} toggleTask={toggleTask} isDarkMode={isDarkMode} />
+              <TaskItem 
+                key={task._id} 
+                task={task} 
+                toggleTask={toggleTask} 
+                deleteTask={deleteTaskFromList} 
+                isDarkMode={isDarkMode} 
+              />
             ))
           )}
         </ul>

@@ -1,12 +1,15 @@
 import { motion } from "framer-motion";
 import { Task } from "@/lib/task";
+import { FiTrash2 } from "react-icons/fi";  // Importamos el icono del tacho de basura
+
 interface TaskItemProps {
   task: Task;
   toggleTask: (id: string) => void;
+  deleteTask: (id: string) => void; 
   isDarkMode: boolean;
 }
 
-const TaskItem = ({ task, toggleTask, isDarkMode }: TaskItemProps) => {
+const TaskItem = ({ task, toggleTask, deleteTask, isDarkMode }: TaskItemProps) => {
   return (
     <motion.li
       key={task._id}
@@ -40,6 +43,18 @@ const TaskItem = ({ task, toggleTask, isDarkMode }: TaskItemProps) => {
       >
         {task.title}
       </motion.span>
+
+      <motion.button
+        onClick={(e) => {
+          e.stopPropagation();
+          deleteTask(task._id);
+        }}
+        className="ml-auto text-gray-400 hover:text-red-600 transition-all"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        <FiTrash2 className="w-5 h-5" /> 
+      </motion.button>
     </motion.li>
   );
 };
