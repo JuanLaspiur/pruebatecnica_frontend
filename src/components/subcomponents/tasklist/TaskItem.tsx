@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-
+import { Task } from "@/lib/task";
 interface TaskItemProps {
   task: Task;
   toggleTask: (id: string) => void;

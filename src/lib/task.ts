@@ -1,16 +1,18 @@
 import { fetchFromAPI } from './api';
 
-interface Task {
-  _id: string;
-  title: string;
-  description: string;
-  completed: boolean;
-  status: string;
-  user: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
+export interface Task {
+  _id?: string;           
+  title: string;        
+  description: string;  
+  completed?: boolean;    
+  status?: string;       
+  user?: string;          
+  createdAt?: Date;    
+  updatedAt?: Date;   
+  dueDate?: Date;        
+  __v?: number;          
 }
+
 
 export const getAllMyTask = async (token: string): Promise<Task[] | null> => {
   try {
