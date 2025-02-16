@@ -1,16 +1,12 @@
 'use client';
-
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Calendar from "@/components/Calendar";
 import UpcomingTasks from "@/components/UpcomingTasks";
 import Clock from "@/components/Clock";
-import { useTheme } from "@/contexts/themeContext";
-import { useAuth } from "@/contexts/authcontext";
-import { useLanguage } from '@/contexts/languageContext';
-import { Task } from "@/lib/task";
-import { useEffect, useState } from "react";
 import Timer from "@/components/Timer";
-import { getAllMyTask } from "@/lib/task";
+import { useAuth,  useLanguage, useTheme } from "@/contexts";
+import {Task, getAllMyTask } from "@/lib/task";
 
 
 export default function Layout({ children }: { children: React.ReactNode }) {

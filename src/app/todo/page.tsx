@@ -1,9 +1,8 @@
 'use client';
 
 import TaskList from "@/components/TaskList";
-import { useLanguage } from '@/contexts/languageContext';
-import { useTheme } from "@/contexts/themeContext";
-import { useAuth } from "@/contexts/authcontext";
+import { useLanguage, useTheme, useAuth } from '@/contexts';
+
 
 export default function Home() {
     const { language } = useLanguage();

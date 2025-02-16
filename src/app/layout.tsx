@@ -1,7 +1,6 @@
 import '../styles/global.css'; 
-import { AuthProvider } from "@/contexts/authcontext";
-import { LanguageProvider } from '@/contexts/languageContext';
-import { ThemeProvider } from '@/contexts/themeContext';
+import { AuthProvider, LanguageProvider, ThemeProvider } from "@/contexts";
+
 export const metadata = {
     title: "To-do",
     description: "To do list ",
