@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import { isToday, parseISO } from "date-fns";
-
-import TaskInput from "./subcomponents/tasklist/TaskInput";
-import TaskFilter from "./subcomponents/tasklist/TaskFilter";
-import TaskItem from "./subcomponents/tasklist/TaskItem";
+import {TaskItem,TaskFilter, TaskInput  } from "./subcomponents";
 import { TASK_FILTERS, BUTTON_TEXT, PLACEHOLDER_TEXT, FILTER_TEXT } from '@/utils/constants/taskConstants';
 import { filterTasks } from '@/utils/taskUtils';  
 import { getAllMyTask, createTask, deleteTask, updateTask } from "@/lib/task";

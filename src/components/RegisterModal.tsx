@@ -1,10 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import Input from './subcomponents/common/Input'; 
 import { register } from '@/lib/auth';
-import ErrorModal from './subcomponents/common/ErrorModal';
-import SuccessModal from './subcomponents/common/SuccessModal';
+import {Input,SuccessModal, ErrorModal  } from './subcomponents'; 
 import { validateEmail } from '@/utils/validators';
 
 interface RegisterModalProps {

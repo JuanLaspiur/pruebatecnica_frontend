@@ -16,7 +16,7 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
   selectedDay,
   setSelectedDay,
 }) => {
-  const today = new Date(); // Fecha actual
+  const today = new Date(); 
 
   const handleSelectDay = (day: number) => {
     setSelectedDay(day);

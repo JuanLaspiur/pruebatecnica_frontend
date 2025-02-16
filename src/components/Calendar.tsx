@@ -1,14 +1,10 @@
 'use client';
 import { useState } from 'react';
 import { generateCalendar } from '@/utils/calendarUtils';
-import { daysOfWeek } from '@/utils/constants/daysOfWeek';
 import { getMonthName } from '@/utils/dateUtils';
-
-import TodayButton from "@/components/buttons/calendar/TodayButton";
-import SelectedDay from '@/components/subcomponents/calendar/SelectedDay'; 
-import MonthNavToggle from '@/components/buttons/calendar/MonthNavToggle';  
-import CalendarGrid from '@/components/subcomponents/calendar/CalendarGrid';  
-
+import { daysOfWeek } from '@/utils/constants/daysOfWeek';
+import { MonthNavToggle, TodayButton } from '@/components/buttons';  
+import { CalendarGrid, SelectedDay } from '@/components/subcomponents';  
 interface CalendarProps {
   isDarkMode: boolean;
   language: 'en' | 'es';
@@ -18,7 +14,6 @@ const Calendar = ({isDarkMode, language, token }:CalendarProps) => {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [selectedDay, setSelectedDay] = useState<number | null>(new Date().getDate()); 
 
-//
   const calendar = generateCalendar(currentDate);
 
   return (

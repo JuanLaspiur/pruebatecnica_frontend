@@ -1,4 +1,4 @@
-import { Task } from '@/components/TaskList';
+import { Task } from "@/lib/task";
 export const filterTasks = (
     tasks: Task[],
     filter: "all" | "active" | "completed",

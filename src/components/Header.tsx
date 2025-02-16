@@ -1,8 +1,5 @@
 'use client';
-
-import DarkModeToggle from "@/components/buttons/header/DarkModeToggle";
-import LanguageToggle from "@/components/buttons/header/LanguageToggle";
-import LogoutToggle from "@/components/buttons/header/LogoutToggle";
+import { DarkModeToggle, LanguageToggle, LogoutToggle} from "@/components/buttons";
 import { User } from "@/contexts/authcontext"; 
 
 interface HeaderProps {
