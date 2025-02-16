@@ -46,6 +46,23 @@ export const createTask = async (token:string | null, title:string): Promise<Tas
   }
 };
 
+export const createTask2 = async (token:string | null, title:string, dueDate: Date |undefined ): Promise<Task | null> => {
+  if(!token) {
+    return null
+  }
+  try {
+    const response = await fetchFromAPI('POST', '/tasks',{title, dueDate}, token);
+    if (!response) {
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+    const tasks: Task = response;
+    return tasks;
+  } catch (error) {
+    console.error('Error al crear la tarea:', error);
+    return null;
+  }
+};
+
 
 export const deleteTask = async(token:string | null, taskId:string): Promise<Task | null> => {
   if(!token) {

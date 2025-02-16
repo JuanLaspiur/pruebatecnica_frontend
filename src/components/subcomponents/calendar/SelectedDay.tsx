@@ -3,15 +3,18 @@ import { FaRegCalendarAlt } from 'react-icons/fa';
 import { getFormattedSelectedDate } from '@/utils/dateUtils';
 import { Task } from "@/lib/task"; 
 import ErrorModal from '../common/ErrorModal'; 
+import TaskModal from './TaskModal'; 
+import { createTask2 } from '@/lib/task';
 
 interface SelectedDayProps {
   selectedDay: number | null;
   currentDate: Date;
   isDarkMode: boolean;
   language: string;
+  token: string | null;
 }
 
-const SelectedDay: React.FC<SelectedDayProps> = ({ selectedDay, currentDate, isDarkMode, language }) => {
+const SelectedDay: React.FC<SelectedDayProps> = ({ selectedDay, currentDate, isDarkMode, language, token }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDate, setTaskDate] = useState<string | null>(null);
@@ -37,19 +40,13 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ selectedDay, currentDate, isD
     setTaskTitle("");
   };
 
-  const handleTaskSubmit = () => {
+  const handleTaskSubmit = async() => {
     if (taskTitle.trim() === "") return;
 
     const dueDate = taskDate ? new Date(taskDate) : undefined;
 
-    const newTask: Task = {
-      _id: Date.now().toString(),
-      title: taskTitle,
-      description: "",  
-      dueDate,  
-    };
-
-    console.log("Nueva tarea:", newTask); 
+   const result = await createTask2(token, taskTitle, dueDate)
+    console.log("Nueva tarea:", result); 
 
     handleModalClose();
   };
@@ -74,40 +71,17 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ selectedDay, currentDate, isD
         {language === 'es' ? 'Agregar tarea postergada' : 'Add Task'}
       </button>
 
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-20 flex justify-center items-center">
-          <div className={` ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-500'} p-4 rounded-lg shadow-md max-w-md w-full`}>
-          <h3 className="text-xl font-semibold mb-4 flex items-center gap-2"><FaRegCalendarAlt />
-  {language === 'es' ? 'Nueva tarea' : 'New Task'}
-</h3>
-
-            <p className={`text-sm ${isDarkMode ? 'text-white' : 'text-gray-700'} mb-4`}>
-             {language === 'es' ? 'Tarea para el día:' : 'Task for the day:'} {getFormattedSelectedDate(selectedDay, currentDate, language)}
-            </p>
-            <input
-              type="text"
-              value={taskTitle}
-              onChange={(e) => setTaskTitle(e.target.value)}
-              placeholder={language === 'es' ? 'Título de la tarea' : 'Task title'}
-              className="w-full p-2 mb-4 border rounded-md"
-            />
-            <div className="flex justify-between">
-              <button
-                onClick={handleModalClose}
-                className="p-2 bg-gray-300 rounded-md"
-              >
-                {language === 'es' ? 'Cancelar' : 'Cancel'}
-              </button>
-              <button
-                onClick={handleTaskSubmit}
-                className={`p-2 bg-blue-500 text-white rounded-md ${isDarkMode ? 'bg-blue-600 hover:bg-blue-500' : 'bg-blue-500 hover:bg-blue-600'}`}
-              >
-                {language === 'es' ? 'Guardar' : 'Save'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <TaskModal
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        onSubmit={handleTaskSubmit}
+        taskTitle={taskTitle}
+        setTaskTitle={setTaskTitle}
+        selectedDay={selectedDay}
+        currentDate={currentDate}
+        language={language}
+        isDarkMode={isDarkMode}
+      />
 
       {errorModalOpen && (
         <ErrorModal 

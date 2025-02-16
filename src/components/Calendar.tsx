@@ -11,9 +11,10 @@ import CalendarGrid from '@/components/subcomponents/calendar/CalendarGrid';
 
 interface CalendarProps {
   isDarkMode: boolean;
-  language: 'en' | 'es';  
+  language: 'en' | 'es';
+  token: string | null;  
 }
-const Calendar = ({isDarkMode, language }:CalendarProps) => {
+const Calendar = ({isDarkMode, language, token }:CalendarProps) => {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [selectedDay, setSelectedDay] = useState<number | null>(new Date().getDate()); 
 
@@ -23,7 +24,7 @@ const Calendar = ({isDarkMode, language }:CalendarProps) => {
   return (
     <>
     <div className="mb-2">
-      <SelectedDay selectedDay={selectedDay} currentDate={currentDate} isDarkMode={isDarkMode} language={language} />
+      <SelectedDay selectedDay={selectedDay} currentDate={currentDate} isDarkMode={isDarkMode} language={language} token={token}/>
       </div>
       <div className={`w-[100%] mx-auto p-2 md:p-4 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} rounded-lg shadow-lg`}>
    <h2 className="text-lg lg:text-xl font-semibold w-full text-center">

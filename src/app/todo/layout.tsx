@@ -44,7 +44,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
      
       <div className="flex flex-col md:flex-row">
         <aside className="md:w-1/4 pb-4 px-2 lg:px-4"> 
-         <Calendar  isDarkMode={isDarkMode} language={language}/>
+         <Calendar  isDarkMode={isDarkMode} language={language} token={token}/>
           <Timer isDarkMode={isDarkMode} language={language}/>
         </aside>
         <main className="md:w-2/4 flex p-2 lg:p-4">
