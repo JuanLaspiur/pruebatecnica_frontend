@@ -6,7 +6,7 @@ import TaskFilter from "./subcomponents/tasklist/TaskFilter";
 import TaskItem from "./subcomponents/tasklist/TaskItem";
 import { TASK_FILTERS, BUTTON_TEXT, PLACEHOLDER_TEXT, FILTER_TEXT } from '@/utils/constants/taskConstants';
 import { filterTasks } from '@/utils/taskUtils';  
-import { getAllMyTask } from "@/lib/task";
+import { getAllMyTask, createTask } from "@/lib/task";
 
 import { Task } from "@/lib/task";
 
@@ -43,12 +43,15 @@ export default function TaskList({isDarkMode, language, token}:TaskListProps) {
   }, [token]);
   
 
-  const addTask = () => {
+  const addTask = async() => {
     if (newTask.trim() === "") return;
     const task: Task = { 
+      _id: Date.now().toString(),
       title: newTask, 
       description: "", 
     };
+
+    await createTask(token, newTask);
     setTasks([...tasks, task]);
     setNewTask("");
   };
