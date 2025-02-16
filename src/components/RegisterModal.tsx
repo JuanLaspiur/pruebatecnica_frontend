@@ -1,9 +1,7 @@
 "use client";
 
 import { useRegister } from "@/hooks/useRegister";
-import RegisterModalLayout from "./subcomponents/registermodal/RegisterModalLayout";
-import RegisterForm from "./subcomponents/registermodal/RegisterForm";
-import { ErrorModal, SuccessModal } from "./subcomponents";
+import { ErrorModal, SuccessModal,RegisterModalLayout,RegisterForm   } from "./subcomponents";
 
 interface RegisterModalProps {
   onClose: () => void;
