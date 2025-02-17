@@ -1,3 +1,5 @@
+import { startOfWeek, endOfWeek, format } from "date-fns";
+
 export const getFormattedSelectedDate = (selectedDay: number | null, currentDate: Date, language: string) => {
     if (!selectedDay) {
         return null;}
@@ -21,4 +23,17 @@ export const getFormattedSelectedDate = (selectedDay: number | null, currentDate
   export const getMonthName = (date: Date, language: string): string => {
     const options: Intl.DateTimeFormatOptions = { month: 'long' };
     return date.toLocaleString(language, options);
+  };
+
+
+  export const getStartAndEndOfWeek = (date: Date) => {
+    const startDate = startOfWeek(date, { weekStartsOn: 1 });
+    const endDate = endOfWeek(date, { weekStartsOn: 1 });
+  
+    return {
+      startDateFormatted: format(startDate, "dd/MM"),
+      endDateFormatted: format(endDate, "dd/MM"),
+      startOfWeekDate: startDate,
+      endOfWeekDate: endDate,
+    };
   };

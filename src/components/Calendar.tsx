@@ -2,7 +2,8 @@
 import { useCalendar } from '@/hooks/useCalendar';
 import { daysOfWeek } from '@/utils/constants/daysOfWeek';
 import { MonthNavToggle, TodayButton } from '@/components/buttons';
-import { CalendarGrid, SelectedDay } from '@/components/subcomponents';
+import { CalendarGrid } from '@/components/subcomponents';
+import SelectedDay from './SelectedDay';
 
 interface CalendarProps {
   isDarkMode: boolean;

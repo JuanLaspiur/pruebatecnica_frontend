@@ -1,5 +1,4 @@
 export { default as CalendarGrid } from './calendar/CalendarGrid';
-export { default as SelectedDay } from './calendar/SelectedDay';
 export { default as TaskModal } from './calendar/TaskModal';
 
 export { default as ErrorModal } from './common/ErrorModal';

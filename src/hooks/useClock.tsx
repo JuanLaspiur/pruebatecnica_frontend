@@ -1,27 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
-
+import { formatClockTime } from '@/utils/clockUtils'; 
 export const useClock = () => {
   const [time, setTime] = useState<string>('');
   const [timeWithoutZone, setTimeWithoutZone] = useState<string>('');
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const formatTime = (date: Date) => {
-    let hours = date.getHours();
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    
-    hours = hours % 12;
-    hours = hours ? hours : 12;
-
-    return {
-      timeString: `${hours}:${minutes} ${ampm} ${date.toLocaleTimeString('en-US', { timeZoneName: 'short' }).split(' ')[2]}`,
-      timeWithoutZoneString: `${hours}:${minutes} ${ampm}`
-    };
-  };
-
   const updateTime = () => {
     const now = new Date();
-    const { timeString, timeWithoutZoneString } = formatTime(now);
+    const { timeString, timeWithoutZoneString } = formatClockTime(now); 
 
     if (time !== timeString) {
       setTime(timeString);
@@ -40,7 +26,7 @@ export const useClock = () => {
         clearInterval(intervalRef.current);
       }
     };
-  }, [time, timeWithoutZone]); 
+  }, [time, timeWithoutZone]);
 
   return { time, timeWithoutZone };
 };
