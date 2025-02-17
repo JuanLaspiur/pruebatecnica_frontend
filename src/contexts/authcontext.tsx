@@ -54,6 +54,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 
 
+  useEffect(() => {
+    if (!user || !token) {
+      logout();
+    }
+  }, []); 
+
   const logout = () => {
     setUser(null);
     setToken(null);

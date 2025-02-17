@@ -8,14 +8,10 @@ import {Task, getAllMyTask } from "@/lib/task";
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { isDarkMode } = useTheme();
   const { language } = useLanguage() as { language: "es" | "en" };
-  const { user, token, logout } = useAuth();
+  const { user, token } = useAuth();
   const  [tasks, setTask] = useState<Task[]>([]);
 
-  useEffect(() => {
-    if (!user || !token) {
-      logout();
-    }
-  }, []); 
+ 
 const fetchAllTasks = async () => {
         if (token) {
           try {
