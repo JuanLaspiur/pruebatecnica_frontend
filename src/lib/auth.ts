@@ -25,24 +25,32 @@ export const login = async (email: string, password: string): Promise<LoginRespo
   }
 };
 
-
 type RegisterResponse = {
-    name: string;
-    email: string;
-    password: string;
-    _id: string;
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
-  };
-  
-  export const register = async (name: string, email: string, password: string): Promise<RegisterResponse> => {
-    try {
-      const response = await fetchFromAPI('POST', '/users', { name, email, password });
-  
-      return response as RegisterResponse;
-    } catch (error) {
-      console.error('Registration failed:', error);
-      throw error;
+  name: string;
+  email: string;
+  password: string;
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
+
+type RegisterErrorResponse = {
+  message: string;
+  error: number;
+};
+
+export const register = async (name: string, email: string, password: string): Promise<RegisterResponse | RegisterErrorResponse> => {
+  try {
+    const response = await fetchFromAPI('POST', '/users', { name, email, password });
+
+    if ('error' in response) {
+      return response;
     }
-  };
+    return response as RegisterResponse;
+
+  } catch (error) {
+    console.error('Registration failed:', error);
+    throw error; 
+  }
+};

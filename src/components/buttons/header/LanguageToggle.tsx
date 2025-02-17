@@ -14,7 +14,7 @@ const LanguageToggle: React.FC = () => {
   return (
     <motion.button
       onClick={toggleLanguage}
-      className="px-3 py-2 bg-blue-500 text-white rounded-full flex items-center space-x-2"
+      className="px-2 py-1 bg-blue-500 text-white rounded-full flex items-center space-x-1"
       whileHover={{ scale: 1.1 }} 
       whileTap={{ scale: 0.9 }} 
       transition={{ type: "spring", stiffness: 300 }}
@@ -23,22 +23,21 @@ const LanguageToggle: React.FC = () => {
         <Image 
           src="/Flag_of_Argentina.png" 
           alt="Flag of Argentina" 
-          width={20}  
-          height={20}
+          width={16} 
+          height={16} 
         />
       ) : (
         <Image 
           src="/flaf_of_ee.uu.png" 
           alt="Flag of United States" 
-          width={20}  
-          height={20}
+          width={16}  
+          height={16} 
         />
       )}
-      <span className="ml-2">{language === "es" ? "ES" : "EN"}</span>
+      <span className="ml-1 text-sm">{language === "es" ? "ES" : "EN"}</span> 
     </motion.button>
   );
 };
 
 export default LanguageToggle;
-
 

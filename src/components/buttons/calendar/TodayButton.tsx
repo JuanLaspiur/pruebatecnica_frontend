@@ -9,8 +9,7 @@ interface TodayButtonProps {
   setSelectedDay: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-
-const TodayButton: React.FC<TodayButtonProps> = ({setCurrentDate,setSelectedDay}) => {
+const TodayButton: React.FC<TodayButtonProps> = ({ setCurrentDate, setSelectedDay }) => {
   const { language } = useLanguage();
   const { isDarkMode } = useTheme();
   const goToToday = () => {
@@ -20,9 +19,9 @@ const TodayButton: React.FC<TodayButtonProps> = ({setCurrentDate,setSelectedDay}
   return (
     <motion.button
       onClick={goToToday}
-      className={`px-4 py-2 ${isDarkMode ? 'bg-gray-600 text-white' : 'bg-green-500 text-white'} rounded-full hover:bg-green-600`}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
+      className={`p-2 text-xs ${isDarkMode ? 'bg-gray-600 text-white' : 'bg-green-500 text-white'} rounded-full hover:bg-green-600`}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
       transition={{ type: 'spring', stiffness: 300 }}
     >
       {language === 'es' ? 'Hoy' : 'Today'}
@@ -31,3 +30,4 @@ const TodayButton: React.FC<TodayButtonProps> = ({setCurrentDate,setSelectedDay}
 };
 
 export default TodayButton;
+

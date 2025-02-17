@@ -1,8 +1,9 @@
 "use client"; 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { login as apiLogin, register as apiRegister } from "../lib/auth";
+import { useRouter } from "next/navigation"; 
+import { login as apiLogin} from "../lib/auth";
 
-interface User {
+export interface User {
   _id: string;
   name: string;
   email: string;
@@ -14,7 +15,6 @@ interface AuthContextType {
   user: User | null;
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
-  register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   setToken: (token: string | null) => void;
 }
@@ -32,6 +32,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const router = useRouter(); // Crea una instancia del router
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -51,23 +52,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const register = async (name: string, email: string, password: string) => {
-    try {
-      await apiRegister(name, email, password);
-    } catch (error) {
-      console.error("Error en registro:", error);
-      throw error;
-    }
-  };
+
 
   const logout = () => {
     setUser(null);
     setToken(null);
-    localStorage.removeItem("user"); 
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    router.push("/login");
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, register, logout, setToken }}>
+    <AuthContext.Provider value={{ user, token, login, logout, setToken }}>
       {children}
     </AuthContext.Provider>
   );

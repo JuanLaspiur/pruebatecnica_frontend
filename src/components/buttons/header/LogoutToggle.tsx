@@ -20,14 +20,15 @@ const LogoutToggle: React.FC = () => {
     <motion.button
       onClick={handleLogout}
       className="flex items-center text-red-500 hover:text-red-700"
-      whileHover={{ scale: 1.1 }}
+      whileHover={{ scale: 1.0 }}
       whileTap={{ scale: 0.9 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
       <FiLogOut className="mr-2" />
-      {language === "es" ? "Cerrar sesión" : "Logout"}
+      <span className="hidden md:inline">{language === "es" ? "Cerrar sesión" : "Logout"}</span>
     </motion.button>
   );
 };
 
 export default LogoutToggle;
+
