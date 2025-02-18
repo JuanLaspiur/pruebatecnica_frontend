@@ -14,11 +14,14 @@ const LoginPage = () => {
   const handleSubmit = async (email: string, password: string) => {
     try {
       await login(email, password);
-      router.push('/es/todo');
+      
+      const locale = router.locale || 'es'; 
+      router.push(`/${locale}/todo`); 
     } catch {
       setError('Error al iniciar sesión');
     }
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-cover bg-center sm:bg-left" style={{ backgroundImage: "url('https://img.freepik.com/fotos-premium/fondos-pantalla-azules-que-te-haran-sonreir_664601-4260.jpg')" }}>

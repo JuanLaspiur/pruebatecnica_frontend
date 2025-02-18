@@ -1,4 +1,15 @@
- {
-    "login":"Login",
-    "name":"name"
+{
+    "loginPage": {
+        "title": "Login",
+        "email": "Email",
+        "password": "Password",
+        "hasntAccount": "Don't have an account yet?",
+        "singUp": "Sign up",
+        "register": "Register",
+        "fullName": "Full Name",
+        "repeatPassword": "Repeat Password",
+        "sendSingUp": "Sign Up",
+        "cancel": "Cancel"
+    },
+    "name": "name"
 }

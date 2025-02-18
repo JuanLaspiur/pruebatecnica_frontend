@@ -1,4 +1,15 @@
 {
-    "login":"Login",
+    "loginPage":{
+        "title":"Ingreso",
+        "email":"Email",
+        "password":"Contraseña",
+        "hasntAccount":"¿Aún no tienes cuenta?",
+        "singUp":"Regístrate",
+        "register":"Registro",
+        "fullName":"Nombre Comlpeto",
+        "repeatPassword":"Repetir Contraseña",
+        "sendSingUp":"Registrarse", 
+        "cancel":"Cancelar"
+    },
     "name":"nombre"
 }
