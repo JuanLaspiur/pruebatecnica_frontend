@@ -52,21 +52,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-
+/*
   useEffect(() => {
     if (!user || !token) {
       logout();
     }
   }, []); 
-
+*/
   const logout = () => {
     setUser(null);
     setToken(null);
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    router.push("/login");
+    router.push("/es/login");
   };
-
+// To do
   return (
     <AuthContext.Provider value={{ user, token, login, logout, setToken }}>
       {children}
