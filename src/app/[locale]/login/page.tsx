@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import {useRouter} from '@/i18n/routing';
+
 import { useAuth } from '@/contexts/authcontext';
 import { RegisterModal, LoginForm } from '@/components';
 
@@ -14,9 +15,7 @@ const LoginPage = () => {
   const handleSubmit = async (email: string, password: string) => {
     try {
       await login(email, password);
-      
-      const locale = router.locale || 'es'; 
-      router.push(`/${locale}/todo`); 
+      router.push(`/todo`); 
     } catch {
       setError('Error al iniciar sesión');
     }

@@ -4,12 +4,76 @@
         "email": "Email",
         "password": "Password",
         "hasntAccount": "Don't have an account yet?",
-        "singUp": "Sign up",
-        "register": "Register",
+        "singUp": "Sign Up",
+        "register": "Registration",
         "fullName": "Full Name",
         "repeatPassword": "Repeat Password",
-        "sendSingUp": "Sign Up",
+        "sendSingUp": "Register",
         "cancel": "Cancel"
     },
-    "name": "name"
+    "header-todoPage": {
+        "greeting": "Hello, ",
+        "logOut":"Log out"
+    },
+    "SelectedDay-todoPage": {
+        "selectedDay": "Selected Day:",
+        "addPostponedTask": "Add postponed task",
+        "Sunday": "Sunday",
+        "Monday": "Monday",
+        "Tuesday": "Tuesday",
+        "Wednesday": "Wednesday",
+        "Thursday": "Thursday",
+        "Friday": "Friday",
+        "Saturday": "Saturday",
+        "January": "January",
+        "February": "February",
+        "March": "March",
+        "April": "April",
+        "May": "May",
+        "June": "June",
+        "July": "July",
+        "August": "August",
+        "September": "September",
+        "October": "October",
+        "November": "November",
+        "December": "December"
+    },
+    "Calendar-todoPage": {
+        "Sunday": "Sunday",
+        "Monday": "Monday",
+        "Tuesday": "Tuesday",
+        "Wednesday": "Wednesday",
+        "Thursday": "Thursday",
+        "Friday": "Friday",
+        "Saturday": "Saturday",
+        "January": "January",
+        "February": "February",
+        "March": "March",
+        "April": "April",
+        "May": "May",
+        "June": "June",
+        "July": "July",
+        "August": "August",
+        "September": "September",
+        "October": "October",
+        "November": "November",
+        "December": "December"
+    },
+    "Timer-todoPage": {
+        "stopwatch-Timer": "Stopwatch"
+    },
+    "TaskList-todoPage": {
+        "newTask": "New task",
+        "add": "ADD",
+        "all": "ALL",
+        "active": "ACTIVE",
+        "completed": "COMPLETED"
+    },
+    "UpcomingTasks-todoPage": {
+        "tasksOfTheWeek": "Tasks of the Week",
+        "all": "All",
+        "completed": "Completed",
+        "pending": "Pending"
+    }
 }
+

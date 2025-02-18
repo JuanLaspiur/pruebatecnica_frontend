@@ -31,16 +31,18 @@ export default async function Layout({
                 <link rel="icon" type="image/png" sizes="32x32" href="/logo/logo.png" />
             </head>
             <body>
-                <main> 
+                <main>
+                     <NextIntlClientProvider locale={locale} messages={messages}>
                     <AuthProvider>
                         <LanguageProvider>
                             <ThemeProvider>
-                                <NextIntlClientProvider locale={locale} messages={messages}>
+                                
                                     {children}
-                                </NextIntlClientProvider>
+                              
                             </ThemeProvider>
                         </LanguageProvider>
-                    </AuthProvider>
+                    </AuthProvider>  
+                    </NextIntlClientProvider>
                 </main>
             </body>
         </html>

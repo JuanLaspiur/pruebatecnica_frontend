@@ -1,6 +1,6 @@
 "use client"; 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { useRouter } from "next/navigation"; 
+import {useRouter} from '@/i18n/routing'; 
 import { login as apiLogin} from "../lib/auth";
 
 export interface User {
@@ -32,12 +32,15 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
-  const router = useRouter(); // Crea una instancia del router
+  const router = useRouter(); 
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
-    if (storedUser) {
+    const storedToken = localStorage.getItem("token");
+
+    if (storedUser && storedToken) {
       setUser(JSON.parse(storedUser));
+      setToken(storedToken); // TO DO Verificar si ha expirado
     }
   }, []);
 
@@ -45,6 +48,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       const response = await apiLogin(email, password);
       setUser(response.user);
+      localStorage.setItem("user", JSON.stringify(response.user));
+      
       setToken(response.token);
     } catch (error) {
       console.error("Error en login:", error);
@@ -52,19 +57,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-/*
+
   useEffect(() => {
     if (!user || !token) {
       logout();
     }
   }, []); 
-*/
+
   const logout = () => {
     setUser(null);
     setToken(null);
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    router.push("/es/login");
+    router.push("/login");
   };
 // To do
   return (
