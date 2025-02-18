@@ -7,4 +7,5 @@ i18n:{
 }
 };
 
+
 export default nextConfig;

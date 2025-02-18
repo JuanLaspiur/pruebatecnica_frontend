@@ -3,12 +3,14 @@
 import { useLanguage } from "@/contexts/languageContext";
 import { motion } from 'framer-motion';
 import Image from 'next/image'; 
+import { useRouter } from 'next/router';
 
 const LanguageToggle: React.FC = () => {
   const { language, setLanguage } = useLanguage();
-
+  const router = useRouter();
   const toggleLanguage = () => {
     setLanguage(language === "es" ? "en" : "es");
+    router.push(router.asPath, router.asPath, { locale: language === "es" ? "en" : "es" });
   };
 
   return (

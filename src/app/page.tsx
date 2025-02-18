@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 
 const HomePage = () => {
   const router = useRouter();
+
   useEffect(() => {
     router.push('/es/login');
   }, [router]);
