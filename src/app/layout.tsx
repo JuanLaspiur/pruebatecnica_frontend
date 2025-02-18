@@ -18,7 +18,7 @@ export default function Layout({
         </head>
         <body>
           <main> 
-            <AuthProvider>
+          <AuthProvider>
               <LanguageProvider>
                 <ThemeProvider>
                   {children}

@@ -14,7 +14,7 @@ const LoginPage = () => {
   const handleSubmit = async (email: string, password: string) => {
     try {
       await login(email, password);
-      router.push('/todo');
+      router.push('/es/todo');
     } catch {
       setError('Error al iniciar sesión');
     }

@@ -13,7 +13,7 @@ const LogoutToggle: React.FC = () => {
 
   const handleLogout = () => {
     logout();
-    router.push("/login"); 
+    router.push("/es/login"); 
   };
 
   return (
