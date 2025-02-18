@@ -97,10 +97,13 @@
         "active": "ACTIVE",
         "completed": "COMPLETED"
     },
-    "UpcomingTasks-todoPage": {
-        "tasksOfTheWeek": "Tasks of the Week",
-        "all": "All",
-        "completed": "Completed",
-        "pending": "Pending"
-    }
+"UpcomingTasks-todoPage": {
+    "tasksOfTheWeek": "Tasks of the Week",
+    "all": "All",
+    "completed": "Completed",
+    "completed_singular": "Completed",
+    "pending": "Pending",
+    "pending_singular": "Pending"
+}
+
 }
