@@ -3,16 +3,21 @@ import { createContext, useContext, useState, ReactNode } from "react";
 
 interface LanguageContextType {
   language: string;
-  setLanguage: (lang: string) => void;
+  toggleLanguage: () => void;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguage] = useState<string>("es");
+  
+ 
+  const toggleLanguage = () =>{
+    setLanguage(language === "es" ? "en" : "es");
+  }
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage }}>
+    <LanguageContext.Provider value={{ language, toggleLanguage }}>
       {children}
     </LanguageContext.Provider>
   );

@@ -52,20 +52,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-/*
-TO -DO descomentar
+
   useEffect(() => {
     if (!user || !token) {
       logout();
     }
   }, []); 
-*/
+
   const logout = () => {
     setUser(null);
     setToken(null);
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    router.push("/es/login");
+    router.push("/login");
   };
 
   return (
