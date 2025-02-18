@@ -18,13 +18,11 @@ export default async function Layout({
     children: React.ReactNode;
     params: any;
 }) {
-    // Ensure locale exists in routing locales
     const { locale } = await params;
     if (!routing.locales.includes(locale as any)) {
-        notFound(); // Handle missing locale
+        notFound(); 
     }
 
-    // Fetch the messages for the given locale
     const messages = await getMessages({ locale });
 
     return (
@@ -35,6 +33,7 @@ export default async function Layout({
             <body>
                 <main>
                     <NextIntlClientProvider locale={locale} messages={messages}>
+                        {/* Como obtendo el locale desde un componente hijo de este provider */}
                         <AuthProvider>
                             <LanguageProvider>
                                 <ThemeProvider>
