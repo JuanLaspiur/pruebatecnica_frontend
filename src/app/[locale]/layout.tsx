@@ -18,12 +18,14 @@ export default async function Layout({
     children: React.ReactNode;
     params: any;
 }) {
-    const {locale} = await params;
+    // Ensure locale exists in routing locales
+    const { locale } = await params;
     if (!routing.locales.includes(locale as any)) {
-        notFound();
+        notFound(); // Handle missing locale
     }
 
-    const messages = await getMessages({ locale }); 
+    // Fetch the messages for the given locale
+    const messages = await getMessages({ locale });
 
     return (
         <html lang={locale}>
@@ -32,16 +34,14 @@ export default async function Layout({
             </head>
             <body>
                 <main>
-                     <NextIntlClientProvider locale={locale} messages={messages}>
-                    <AuthProvider>
-                        <LanguageProvider>
-                            <ThemeProvider>
-                                
+                    <NextIntlClientProvider locale={locale} messages={messages}>
+                        <AuthProvider>
+                            <LanguageProvider>
+                                <ThemeProvider>
                                     {children}
-                              
-                            </ThemeProvider>
-                        </LanguageProvider>
-                    </AuthProvider>  
+                                </ThemeProvider>
+                            </LanguageProvider>
+                        </AuthProvider>  
                     </NextIntlClientProvider>
                 </main>
             </body>
