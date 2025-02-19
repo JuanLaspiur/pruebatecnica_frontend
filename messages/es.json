@@ -91,11 +91,12 @@
         "stopwatch-Timer": "Cronómetro"
     },
     "TaskList-todoPage": {
-        "newTask": "Nueva tarea",
+        "newTask": "Nueva tarea..",
         "add": "AÑADIR",
         "all": "TODAS",
         "active": "ACTIVAS",
-        "completed": "COMPLETADAS"
+        "completed": "COMPLETADAS",
+        "anyTask":"No hay tareas para hoy"
     },
  "UpcomingTasks-todoPage": {
     "tasksOfTheWeek": "Tareas de la Semana",

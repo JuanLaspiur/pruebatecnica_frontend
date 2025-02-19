@@ -91,11 +91,12 @@
         "stopwatch-Timer": "Stopwatch"
     },
     "TaskList-todoPage": {
-        "newTask": "New task",
+        "newTask": "New task..",
         "add": "ADD",
         "all": "ALL",
         "active": "ACTIVE",
-        "completed": "COMPLETED"
+        "completed": "COMPLETED",
+         "anyTask":"No tasks for today"
     },
 "UpcomingTasks-todoPage": {
     "tasksOfTheWeek": "Tasks of the Week",
