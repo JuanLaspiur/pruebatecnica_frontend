@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import {useRouter} from '@/i18n/routing';
+
 import { useAuth } from '@/contexts/authcontext';
 import { RegisterModal, LoginForm } from '@/components';
 
@@ -14,11 +15,12 @@ const LoginPage = () => {
   const handleSubmit = async (email: string, password: string) => {
     try {
       await login(email, password);
-      router.push('/todo');
+      router.push(`/todo`); 
     } catch {
       setError('Error al iniciar sesión');
     }
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-cover bg-center sm:bg-left" style={{ backgroundImage: "url('https://img.freepik.com/fotos-premium/fondos-pantalla-azules-que-te-haran-sonreir_664601-4260.jpg')" }}>

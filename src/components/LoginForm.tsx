@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image'; 
 import Input from './subcomponents/common/Input';
+import {useTranslations} from 'next-intl';
 
 interface LoginFormProps {
   onSubmit: (email: string, password: string) => void;
@@ -14,7 +15,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, error, onOpenRegisterMo
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
+  const t = useTranslations('loginPage');
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -35,14 +36,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, error, onOpenRegisterMo
         />
       </div>
 
-      <h1 className="text-2xl font-semibold text-center text-blue-600 my-3">Login</h1>
+      <h1 className="text-2xl font-semibold text-center text-blue-600 my-3">{t('title')}</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <Input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
+            placeholder={t('email')}
             required
           />
         </div>
@@ -51,7 +52,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, error, onOpenRegisterMo
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
+            placeholder={t('password')}
             required
           />
         </div>
@@ -72,7 +73,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, error, onOpenRegisterMo
       </form>
 
       <p className="mt-4 text-center text-sm">
-        ¿No tienes una cuenta? <button className="text-blue-600 hover:underline" onClick={onOpenRegisterModal}>Regístrate</button>
+         {t('hasntAccount')} <button className="text-blue-600 hover:underline" onClick={onOpenRegisterModal}>{t('singUp')}</button>
       </p>
       {error && <p className="pt-5 text-center text-red-500 text-sm">{error}</p>}
     </div>

@@ -1,10 +1,14 @@
+import { useTranslations } from "next-intl";
+
 interface TaskFilterProps {
   filter: "all" | "active" | "completed";
   setFilter: React.Dispatch<React.SetStateAction<"all" | "active" | "completed">>;
-  filterText: (type: "all" | "active" | "completed") => string;
 }
 
-const TaskFilter = ({ filter, setFilter, filterText }: TaskFilterProps) => (
+const TaskFilter = ({ filter, setFilter }: TaskFilterProps) =>{
+      const t = useTranslations('TaskList-todoPage');
+      return(
+
   <div className="flex space-x-4 mb-4 text-sm lg:text-base">
     {["all", "active", "completed"].map((type) => (
       <button
@@ -15,7 +19,7 @@ const TaskFilter = ({ filter, setFilter, filterText }: TaskFilterProps) => (
             ? "text-blue-500" 
             : "text-gray-500"}`}
       >
-        <span>{filterText(type as "all" | "active" | "completed").toUpperCase()}</span>
+        <span>{t(type)}</span>
         <span
           className={`absolute bottom-0 left-0 w-full h-[2px] bg-blue-500 
             ${filter === type ? "transform scale-x-100 transition-transform duration-500" : "transform scale-x-0"}`}
@@ -23,7 +27,7 @@ const TaskFilter = ({ filter, setFilter, filterText }: TaskFilterProps) => (
       </button>
     ))}
   </div>
-);
+);}
 
 export default TaskFilter;
 

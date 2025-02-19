@@ -1,16 +1,15 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useLanguage } from "@/contexts/languageContext";
 import { useTheme } from "@/contexts/themeContext";
 
 interface TodayButtonProps {
   setCurrentDate: React.Dispatch<React.SetStateAction<Date>>;
   setSelectedDay: React.Dispatch<React.SetStateAction<number | null>>;
+  language: 'en' | 'es';
 }
 
-const TodayButton: React.FC<TodayButtonProps> = ({ setCurrentDate, setSelectedDay }) => {
-  const { language } = useLanguage();
+const TodayButton: React.FC<TodayButtonProps> = ({ setCurrentDate, setSelectedDay, language }) => {
   const { isDarkMode } = useTheme();
   const goToToday = () => {
     setCurrentDate(new Date());

@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
 interface AnimatedButtonProps {
   onClick: () => void;
-  buttonText: string;
   isDarkMode: boolean;
 }
 
-const AnimatedButton = ({ onClick, buttonText, isDarkMode }: AnimatedButtonProps) => {
+const AnimatedButton = ({ onClick, isDarkMode }: AnimatedButtonProps) => {
+     const t = useTranslations('TaskList-todoPage');
   return (
     <motion.button
       onClick={onClick}
@@ -15,7 +16,7 @@ const AnimatedButton = ({ onClick, buttonText, isDarkMode }: AnimatedButtonProps
       whileTap={{ scale: 0.9 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
-      {buttonText}
+      {t('add')}
     </motion.button>
   );
 };

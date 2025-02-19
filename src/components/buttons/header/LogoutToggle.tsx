@@ -2,18 +2,19 @@
 
 import { FiLogOut } from "react-icons/fi"; 
 import { motion } from 'framer-motion';
-import { useLanguage } from "@/contexts/languageContext";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/authcontext";
+import {useTranslations} from 'next-intl';
+
 
 const LogoutToggle: React.FC = () => {
   const { logout } = useAuth();
-  const { language } = useLanguage();
   const router = useRouter();
+  const t = useTranslations('header-todoPage');
 
   const handleLogout = () => {
     logout();
-    router.push("/login"); 
+    router.push("/es/login"); 
   };
 
   return (
@@ -25,7 +26,7 @@ const LogoutToggle: React.FC = () => {
       transition={{ type: "spring", stiffness: 300 }}
     >
       <FiLogOut className="mr-2" />
-      <span className="hidden md:inline">{language === "es" ? "Cerrar sesión" : "Logout"}</span>
+      <span className="hidden md:inline">{t('logOut')}</span>
     </motion.button>
   );
 };

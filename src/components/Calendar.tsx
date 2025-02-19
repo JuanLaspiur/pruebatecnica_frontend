@@ -3,6 +3,7 @@ import { useCalendar } from '@/hooks/useCalendar';
 import { daysOfWeek } from '@/utils/constants/daysOfWeek';
 import { MonthNavToggle, TodayButton } from '@/components/buttons';
 import { CalendarGrid } from '@/components/subcomponents';
+import { useLocale} from 'next-intl';
 import SelectedDay from './SelectedDay';
 
 interface CalendarProps {
@@ -12,12 +13,13 @@ interface CalendarProps {
 }
 
 const Calendar = ({ isDarkMode, language, token }: CalendarProps) => {
-  const { currentDate, setCurrentDate, selectedDay, setSelectedDay, calendar, monthName } = useCalendar({ language });
+  const locale = useLocale() as'es'|'en';
+  const { currentDate, setCurrentDate, selectedDay, setSelectedDay, calendar, monthName } = useCalendar({ language:locale });
 
   return (
     <>
       <div className="mb-2">
-        <SelectedDay selectedDay={selectedDay} currentDate={currentDate} isDarkMode={isDarkMode} language={language} token={token} />
+        <SelectedDay selectedDay={selectedDay} currentDate={currentDate} isDarkMode={isDarkMode} language={locale} token={token} />
       </div>
       <div className={`w-[100%] mx-auto p-2 md:p-4 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} rounded-lg shadow-lg`}>
         <h2 className="text-lg lg:text-xl font-semibold w-full text-center">
@@ -26,12 +28,12 @@ const Calendar = ({ isDarkMode, language, token }: CalendarProps) => {
 
         <div className="flex items-center justify-between mb-4">
           <MonthNavToggle direction="prev" currentDate={currentDate} setCurrentDate={setCurrentDate} isDarkMode={isDarkMode} />
-          <TodayButton setCurrentDate={setCurrentDate} setSelectedDay={setSelectedDay} />
+          <TodayButton setCurrentDate={setCurrentDate} setSelectedDay={setSelectedDay} language={locale}/>
           <MonthNavToggle direction="next" currentDate={currentDate} setCurrentDate={setCurrentDate} isDarkMode={isDarkMode} />
         </div>
 
         <CalendarGrid 
-          daysOfWeek={daysOfWeek[language] || daysOfWeek.en} 
+          daysOfWeek={daysOfWeek[locale] || daysOfWeek.en} 
           calendar={calendar} 
           isDarkMode={isDarkMode} 
           selectedDay={selectedDay} 
