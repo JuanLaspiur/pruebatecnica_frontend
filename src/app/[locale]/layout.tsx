@@ -33,7 +33,6 @@ export default async function Layout({
             <body>
                 <main>
                     <NextIntlClientProvider locale={locale} messages={messages}>
-                        {/* Como obtendo el locale desde un componente hijo de este provider */}
                         <AuthProvider>
                             <LanguageProvider>
                                 <ThemeProvider>
