@@ -26,7 +26,7 @@ const TaskItem = ({ task, toggleTask, deleteTask, isDarkMode }: TaskItemProps) =
       {isModalOpen && (
         <ConfirmationModal
           message={message}
-          onConfirm={() => handleDelete(task._id)} 
+          onConfirm={() => handleDelete(task._id as string)} 
           onClose={() => setIsModalOpen(false)} 
         />
       )}
@@ -43,12 +43,12 @@ const TaskItem = ({ task, toggleTask, deleteTask, isDarkMode }: TaskItemProps) =
           ${task.completed ? `line-through text-gray-400 ${isDarkMode ? 'border border-blue-500' : ' border border-black-800'}` : ""}
           hover:scale-105 hover:${isDarkMode ? "bg-gray-600" : "bg-gray-200"}
         `}
-        onClick={() => toggleTask(task._id)}
+        onClick={() => toggleTask(task._id as string)}
       >
         <motion.input
           type="checkbox"
           checked={task.completed}
-          onChange={() => toggleTask(task._id)}
+          onChange={() => toggleTask(task._id as string)}
           className="mr-4 w-6 h-6 cursor-pointer accent-blue-500"
           whileTap={{ scale: 0.9 }}
         />
