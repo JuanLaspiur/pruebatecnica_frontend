@@ -10,13 +10,12 @@ import { RegisterModal, LoginForm } from '@/components';
 const LoginPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(false); // Estado para controlar la visibilidad
+  const [isVisible, setIsVisible] = useState(false); 
   const { login } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    // Hacer visible el componente con un delay
-    setTimeout(() => setIsVisible(true), 100); // Puedes ajustar el tiempo de delay
+    setTimeout(() => setIsVisible(true), 100); 
   }, []);
 
   const handleSubmit = async (email: string, password: string) => {
