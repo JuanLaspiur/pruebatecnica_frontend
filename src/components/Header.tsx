@@ -7,16 +7,14 @@ import {useTranslations} from 'next-intl';
 interface HeaderProps {
   isDarkMode: boolean;
   user: User; 
-  language: 'en' | 'es'; 
-  cambiarIdioma:()=>void 
-}
+  }
 
-export default function Header({ isDarkMode, user, language, cambiarIdioma }: HeaderProps) { 
+export default function Header({ isDarkMode, user }: HeaderProps) { 
  const t = useTranslations('header-todoPage');
   return (
     <header className={`${isDarkMode ? 'bg-gray-700 text-white' : 'bg-gray-100 text-black'} shadow-md p-2 px-4 flex justify-between items-center`}>
       <div className="flex space-x-3">
-        <LanguageToggle  cambiarIdioma={cambiarIdioma} />
+        <LanguageToggle   />
         <DarkModeToggle />
       </div>
       <div className="flex items-center space-x-4">

@@ -17,6 +17,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   setToken: (token: string | null) => void;
+  setUser:  (user: User | null) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -34,22 +35,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [token, setToken] = useState<string | null>(null);
   const router = useRouter(); 
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    const storedToken = localStorage.getItem("token");
-
-    if (storedUser && storedToken) {
-      setUser(JSON.parse(storedUser));
-      setToken(storedToken); // TO DO Verificar si ha expirado
-    }
-  }, []);
-
+  
   const login = async (email: string, password: string) => {
     try {
       const response = await apiLogin(email, password);
       setUser(response.user);
-      localStorage.setItem("user", JSON.stringify(response.user));
-      
       setToken(response.token);
     } catch (error) {
       console.error("Error en login:", error);
@@ -57,23 +47,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-
   useEffect(() => {
-    if (!user || !token) {
-      logout();
-    }
-  }, []); 
+    const savedToken = localStorage.getItem("authToken");
+    const savedUser = localStorage.getItem("authUser");
+
+    if (savedToken) setToken(savedToken);
+    if (savedUser) setUser(JSON.parse(savedUser));
+  }, [setToken, setUser]);
 
   const logout = () => {
     setUser(null);
     setToken(null);
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
     router.push("/login");
   };
-// To do
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, setToken }}>
+    <AuthContext.Provider value={{ user, token, login, logout, setToken, setUser }}>
       {children}
     </AuthContext.Provider>
   );
