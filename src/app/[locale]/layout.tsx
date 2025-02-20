@@ -16,9 +16,9 @@ export default async function Layout({
     params
 }: {
     children: React.ReactNode;
-    params:  Promise<{ locale: string |'es' | 'en' }>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    params: any;
 }) {
- 
     const { locale } = await params as { locale: 'es' | 'en'};
     if (!routing.locales.includes(locale)) { 
         notFound(); 
