@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { isToday, parseISO } from "date-fns";
+import { isToday } from "date-fns";
 import {TaskItem,TaskFilter, TaskInput  } from "./subcomponents";
 import { TASK_FILTERS} from '@/utils/constants/taskConstants';
 import { filterTasks } from '@/utils/taskUtils';  
@@ -80,7 +80,7 @@ export default function TaskList({ isDarkMode, token }: TaskListProps) {
 
 
   const filteredTasks = filterTasks(tasks, filter, TASK_FILTERS).filter(task => 
-    task.dueDate && isToday(parseISO(task.dueDate))
+    task.dueDate && isToday(task.dueDate)
   );
   const t = useTranslations('TaskList-todoPage');
   return (

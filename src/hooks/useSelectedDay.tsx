@@ -8,6 +8,7 @@ export const useSelectedDay = (selectedDay: number | null, currentDate: Date, la
   const [errorModalOpen, setErrorModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [isTaskSubmitted, setIsTaskSubmitted] = useState(false);
+ 
 
   if (!selectedDay) return null;
 
@@ -35,13 +36,17 @@ export const useSelectedDay = (selectedDay: number | null, currentDate: Date, la
 
   const handleTaskSubmit = async () => {
     if (taskTitle.trim() === "") return;
-
+  
     const dueDate = taskDate ? new Date(taskDate) : undefined;
     const result = await createTask2(token, taskTitle, dueDate);
-    setIsTaskSubmitted(result?._id ? true :false);
-
-    handleModalClose();
+    console.log(JSON.stringify(result));
+    setIsTaskSubmitted(result?._id ? true : false);
+  
+   setTimeout(() => {
+      handleModalClose();
+    }, 2000);
   };
+  
 
   return {
     isModalOpen,

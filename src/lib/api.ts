@@ -5,7 +5,7 @@
     token?: string
   ) => {
     try {
-      const url = `http://localhost:4000/api${endpoint}`;
+      const url = `${process.env.NEXT_PUBLIC_BACK_API}/api${endpoint}`;
       const headers: HeadersInit = {
         'Content-Type': 'application/json',
       };

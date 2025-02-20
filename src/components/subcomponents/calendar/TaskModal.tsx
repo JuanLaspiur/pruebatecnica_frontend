@@ -39,7 +39,7 @@ const TaskModal = ({
   const handleTaskSubmit = async () => {
      onSubmit(); 
     if (isTaskSubmitted) {
-      setIsSuccessModalOpen(true);
+      setIsSuccessModalOpen(true); 
     } else {
       setIsErrorModalOpen(true);
     }
