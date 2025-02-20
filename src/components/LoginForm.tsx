@@ -19,7 +19,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, error, onOpenRegisterMo
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000)); 
     onSubmit(email, password);
     setIsLoading(false);
   };
