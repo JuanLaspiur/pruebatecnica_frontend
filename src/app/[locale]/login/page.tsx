@@ -38,7 +38,7 @@ const LoginPage = () => {
         priority
       />
       <div 
-        className={`relative flex flex-col items-center justify-center w-full max-w-sm sm:ml-16 space-y-6 bg-white bg-opacity-75 p-3 rounded-lg shadow-lg transition-opacity duration-500 ease-in-out ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+        className={`relative flex flex-col items-center justify-center w-full max-w-sm sm:ml-16 space-y-6 bg-white bg-opacity-75 p-2 rounded-lg shadow-lg transition-opacity duration-500 ease-in-out ${isVisible ? 'opacity-100' : 'opacity-0'}`}
       >
         <LoginForm onSubmit={handleSubmit} error={error} onOpenRegisterModal={() => setIsRegisterOpen(true)} />
         
