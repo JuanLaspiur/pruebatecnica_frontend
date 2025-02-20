@@ -22,7 +22,6 @@ const LanguageToggle: React.FC = () => {
     localStorage.setItem("authToken", token);
     localStorage.setItem("authUser", JSON.stringify(user));
 
-    // Cambiar idioma sin perder información del contexto
     router.replace(`/${newLocale}${pathname.substring(3)}`);
   };
 
