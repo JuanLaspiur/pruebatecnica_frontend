@@ -42,7 +42,7 @@ type RegisterErrorResponse = {
 export const register = async (name: string, email: string, password: string): Promise<RegisterResponse | RegisterErrorResponse> => {
   try {
     const response = await fetchFromAPI('POST', '/users', { name, email, password });
-
+    
     if ('error' in response) {
       return response;
     }

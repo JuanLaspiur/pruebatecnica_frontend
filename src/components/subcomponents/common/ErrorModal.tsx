@@ -8,7 +8,7 @@ interface ErrorModalProps {
 
 const ErrorModal: React.FC<ErrorModalProps> = ({ message, onClose }) => {
   return (
-    <div className="w-full h-full absolute z-1 flex items-center justify-center bg-black bg-opacity-50 top-0 left-0"   onClick={onClose} >
+    <div className="fixed top-0 left-0 w-screen h-screen z-[9999] flex items-center justify-center"   onClick={onClose} >
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
         <div className="flex items-center mb-4">
           <Image
