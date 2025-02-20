@@ -2,6 +2,25 @@ import { useState } from "react";
 import { register } from "@/lib/auth";
 import { validateEmail } from "@/utils/validators";
 
+interface RegisterErrorResponse {
+  message: string; 
+  error: number; 
+}
+interface RegisterResponse {
+  name: string;
+  email: string;
+  password: string;
+  _id: string; 
+  createdAt: string; 
+  updatedAt: string; 
+  __v: number; 
+}
+const isRegisterErrorResponse = (
+  result: RegisterResponse | RegisterErrorResponse
+): result is RegisterErrorResponse => {
+  return (result as RegisterErrorResponse).error !== undefined;
+};
+
 export const useRegister = (onClose: () => void) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -43,8 +62,7 @@ export const useRegister = (onClose: () => void) => {
     try {
       const { name, email, password } = formData;
       const result = await register(name, email, password);
-
-      if (result.error) {
+      if (isRegisterErrorResponse(result)) {
         setError("El correo electrónico ya está registrado.");
       } else {
         setShowSuccessModal(true);
