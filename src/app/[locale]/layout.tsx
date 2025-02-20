@@ -1,5 +1,5 @@
 import '../../styles/global.css'; 
-import { AuthProvider, LanguageProvider, ThemeProvider } from "@/contexts";
+import { AuthProvider, ThemeProvider } from "@/contexts";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -34,11 +34,9 @@ export default async function Layout({
                 <main>
                     <NextIntlClientProvider locale={locale} messages={messages}>
                         <AuthProvider>
-                            <LanguageProvider>
                                 <ThemeProvider>
                                     {children}
                                 </ThemeProvider>
-                            </LanguageProvider>
                         </AuthProvider>  
                     </NextIntlClientProvider>
                 </main>
