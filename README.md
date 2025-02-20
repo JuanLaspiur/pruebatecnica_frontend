@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# To-Do Task-List
 
-## Getting Started
+## Description
 
-First, run the development server:
+This project is a task list application built with Next.js and TypeScript. The application allows managing tasks with a calendar, assigning schedules, and setting responsible users.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Technologies Used
+
+- **Framework**: Next.js (v15.1.7)
+- **Language**: TypeScript
+- **UI Animations**: Framer Motion
+- **Internationalization**: next-intl
+- **Styling**: TailwindCSS
+- **Date Handling**: date-fns
+- **Icons**: react-icons
+- **Loading Spinners**: react-spinners
+- **Testing**: Jest, Testing Library
+- **Linting**: ESLint
+
+## Installation
+
+1. Clone the repository:
+   ```sh
+   git clone <repo_url>
+   cd front_typescript
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+
+## Environment Variables
+
+This project requires a `.env` file with the following variable:
+
+```
+NEXT_PUBLIC_BACK_API=<your_api_url>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Replace `<your_api_url>` with the actual backend API URL.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev`: Starts the development server.
+- `npm run build`: Builds the application for production.
+- `npm run start`: Starts the application in production mode.
+- `npm run lint`: Runs the code linter.
+- `npm run test`: Runs tests with Jest.
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+front_typescript/
+│-- public/              # Static resources
+│-- src/
+│   ├── components/      # Reusable components
+│   ├── pages/           # Main routes and views
+│   ├── styles/          # Stylesheets
+│   ├── utils/           # Utilities and helpers
+│   ├── hooks/           # Custom Hooks
+│   ├── context/         # Context API for global states
+│   ├── services/        # API calls and business logic
+│-- .eslintrc.js         # ESLint configuration
+│-- tailwind.config.js   # Tailwind CSS configuration
+│-- tsconfig.json        # TypeScript configuration
+│-- package.json         # Dependencies and scripts
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contribution
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+If you want to contribute:
+1. Fork the repository.
+2. Create a branch (`feature/new-feature`).
+3. Make changes and submit a pull request.
 
-## Deploy on Vercel
+## License
+This project is licensed under Juan Laspiur.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
