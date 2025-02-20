@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Header, Calendar, UpcomingTasks, Clock, Timer} from "@/components";
 import { useAuth, useTheme } from "@/contexts";
 import {Task, getAllMyTask } from "@/lib/task";
@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const  [tasks, setTask] = useState<Task[]>([]);
 
  
-const fetchAllTasks = async () => {
+const fetchAllTasks =  useCallback( async () => {
         if (token) {
           try {
             const result = await getAllMyTask(token);
@@ -28,11 +28,13 @@ const fetchAllTasks = async () => {
         } else {
           console.error('Token no disponible');
         }
-      };
-   useEffect(() => {
-      fetchAllTasks();
-    }, [token]);
-
+      }, [token]);
+   
+    
+      useEffect(() => {
+        fetchAllTasks();
+      }, [token, fetchAllTasks]);  
+    
   if(!user){
     return null
   }
@@ -43,7 +45,7 @@ const fetchAllTasks = async () => {
      
       <div className="flex flex-col md:flex-row">
         <aside className="md:w-1/4 pb-4 px-2 lg:px-4"> 
-         <Calendar  isDarkMode={isDarkMode} language={locale} token={token}/>
+         <Calendar  isDarkMode={isDarkMode}  token={token}/>
           <Timer isDarkMode={isDarkMode} language={locale}/>
         </aside>
         <main className="md:w-2/4 flex p-2 lg:p-4">

@@ -2,12 +2,10 @@ import { useState, useEffect } from "react";
 import { Task } from "@/lib/task";
 import { getStartAndEndOfWeek } from "@/utils/dateUtils";
 
-
 export const useUpcomingTasks = (tasks: Task[]) => {
   const [upcomingTasks, setUpcomingTasks] = useState<Task[]>([]);
   const [filterStatus, setFilterStatus] = useState<"all" | "completed" | "pending">("all");
   const { startDateFormatted, endDateFormatted, startOfWeekDate, endOfWeekDate } = getStartAndEndOfWeek(new Date());
-
 
   useEffect(() => {
     const upcomingThisWeek = tasks.filter(({ dueDate }) => {
@@ -20,7 +18,7 @@ export const useUpcomingTasks = (tasks: Task[]) => {
     });
 
     setUpcomingTasks(upcomingThisWeek.slice(0, 5));
-  }, [tasks]);
+  }, [tasks, startOfWeekDate, endOfWeekDate]);  
 
   const filteredTasks = upcomingTasks.filter((task) => {
     switch (filterStatus) {

@@ -8,11 +8,10 @@ import SelectedDay from './SelectedDay';
 
 interface CalendarProps {
   isDarkMode: boolean;
-  language: 'en' | 'es';
   token: string | null;
 }
 
-const Calendar = ({ isDarkMode, language, token }: CalendarProps) => {
+const Calendar = ({ isDarkMode, token }: CalendarProps) => {
   const locale = useLocale() as'es'|'en';
   const { currentDate, setCurrentDate, selectedDay, setSelectedDay, calendar, monthName } = useCalendar({ language:locale });
 

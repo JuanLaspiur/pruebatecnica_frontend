@@ -16,10 +16,11 @@ export default async function Layout({
     params
 }: {
     children: React.ReactNode;
-    params: any;
+    params:  Promise<{ locale: string |'es' | 'en' }>;
 }) {
-    const { locale } = await params;
-    if (!routing.locales.includes(locale as any)) {
+ 
+    const { locale } = await params as { locale: 'es' | 'en'};
+    if (!routing.locales.includes(locale)) { 
         notFound(); 
     }
 
